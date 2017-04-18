@@ -12,7 +12,6 @@ object MainClass {
 
     @JvmStatic fun main(args: Array<String>) {
         log.debug("The main program begins to run..." + args.toString())
-        log.debug("The program exits normally...")
     }
 
 }

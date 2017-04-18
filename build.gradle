@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.1.0-rc-31'
+    ext.kotlin_version = '1.1.0'
     ext.dokka_version = "0.9.13"
     repositories {
         jcenter()
@@ -43,6 +43,7 @@ def logbackVersion = "1.1.7"
 def groovyVersion = "2.4.7"
 
 dependencies {
+    compile "org.jetbrains.kotlin:kotlin-compiler:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-runtime:$kotlin_version"
