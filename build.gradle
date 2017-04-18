@@ -34,7 +34,7 @@ repositories {
 
 }
 
-def spekVersion = '1.1.0-beta3'
+def spekVersion = '1.1.0'
 def kluentVersion = '1.14'
 def expektVersion = '0.5.0'
 def harmkrest = '1.2.3.0'
