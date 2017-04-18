@@ -79,6 +79,13 @@ junitPlatform {
     platformVersion '1.0.0-M3'
 }
 
+test {
+    reports {
+        junitXml.enabled = false
+        html.enabled = true
+    }
+}
+
 // dokka configuration
 dokka {
     moduleName = "data"
