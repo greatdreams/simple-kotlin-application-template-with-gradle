@@ -21,6 +21,7 @@ apply plugin: 'application'
 apply plugin: 'org.junit.platform.gradle.plugin'
 
 group = 'com.greatdreams.kotlin'
+version = '0.0.1'
 
 mainClassName = 'com.greatdreams.kotlin.template.MainClass'
 
@@ -67,7 +68,7 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "4.3"
+    gradleVersion = "4.3.1"
 }
 
 
@@ -98,4 +99,16 @@ dokka {
         suffix = '#L'
     }
     sourceDirs = files('src/main/kotlin')
+}
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+                'Implementation-Version': version,
+                'Main-Class': 'com.greatdreams.kotlin.template.MainClass'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
