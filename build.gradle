@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.1.60'
+    ext.kotlin_version = '1.2.0'
     ext.dokka_version = "0.9.15"
     repositories {
         jcenter()
@@ -45,6 +45,8 @@ def groovyVersion = "2.4.12"
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     compile "org.slf4j:slf4j-api:${slf4jVersion}"
@@ -52,7 +54,9 @@ dependencies {
     compile "ch.qos.logback:logback-classic:$logbackVersion"
     compile "ch.qos.logback:logback-access:$logbackVersion"
     compile "org.codehaus.groovy:groovy-all:$groovyVersion"
-    
+
+    testCompile "org.jetbrains.kotlin:kotlin-test:${kotlin_version}"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}"
     testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
         exclude group: 'org.jetbrains.kotlin'
     }
