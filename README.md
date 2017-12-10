@@ -4,7 +4,7 @@ This is a kotlin application template with gradle build tool.
 #### upgrade gradle wrapper version
 
 ```bash
-$ ./gradlew wrapper --gradle-version=4.3.1
+$ ./gradlew wrapper --gradle-version=4.4
 ```
 
 # Reference
