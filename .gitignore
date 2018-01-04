@@ -3,4 +3,3 @@ build
 .idea
 *.iml
 .DS_Store
-src/main/java/
