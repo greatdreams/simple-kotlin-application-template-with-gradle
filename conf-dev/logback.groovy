@@ -1,9 +1,9 @@
-import ch.qos.logback.classic.encoder.PatternLayoutEncoder
-import ch.qos.logback.core.ConsoleAppender
+import ch.qos.logback.core.filter.*
+import static ch.qos.logback.classic.Level.*
 
 appender("CONSOLE", ConsoleAppender) {
     encoder(PatternLayoutEncoder) {
         pattern = "%level %date %logger - %msg%n"
     }
 }
-root(DEBUG, ["CONSOLE"])
+root(ch.qos.logback.classic.Level.INFO, ["CONSOLE"])

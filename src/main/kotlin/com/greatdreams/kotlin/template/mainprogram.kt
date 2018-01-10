@@ -1,6 +1,7 @@
 package com.greatdreams.kotlin.template
 
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 /**
  * @author Greatdreams
@@ -11,8 +12,16 @@ object MainClass {
     val log = LoggerFactory.getLogger(javaClass)
 
     @JvmStatic fun main(args: Array<String>) {
-        log.debug("The main program begins to run..." + args.toString())
-        log.debug("The main program exits normally...")
+        log.info("The main program begins to run.")
+        val ctx = AnnotationConfigApplicationContext("com.greatdreams.kotlin.template.spring.config")
+        val beanNames = ctx.beanDefinitionNames
+        beanNames.forEach{ name ->
+            log.info(name + ": " + ctx.getBean(name).javaClass)
+        }
+        val applictionConfig = ctx.getBean("applicationConfiguration")
+        val applicationInformation = ctx.getBean("applicationInformation")
+        log.info(applicationInformation.toString())
+        log.info("The main program exits normally.")
     }
 
 }
