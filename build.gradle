@@ -5,6 +5,9 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url "https://dl.bintray.com/kotlin/kotlin-dev/" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         // plugins for documenting of kotlin source code
@@ -54,8 +57,14 @@ def groovyVersion = "2.4.12"
 def typesafeVersion = '1.3.2'
 def jacksonYAMLVersion = '2.9.3'
 def springVersion = '5.0.2.RELEASE'
+
+def hikariCPVersion = '2.7.4'
+def commonsDBCPVersion = '2.2.0'
 def mysqlVersion = '6.0.6'
 def postgresqlVersion = '42.1.4'
+def anormVersion = '2.6.0'
+def slickVersion = '3.2.1'
+
 def mybatisVersion = '3.4.5'
 def mybatisSpringVersion = '1.3.1'
 def jedisVersion = '2.9.0'
@@ -94,9 +103,27 @@ dependencies {
     compile "org.springframework:spring-instrument:${springVersion}"
     testCompile "org.springframework:spring-test:${springVersion}"
 
+    // database pool - hikariCP dependencies
+    compile "com.zaxxer:HikariCP:${hikariCPVersion}"
+    // database pool - commons-dhcp dependencies
+    compile "org.apache.commons:commons-dbcp2:${commonsDBCPVersion}"
     // databases driver dependencies
     compile "mysql:mysql-connector-java:${mysqlVersion}"
     compile "org.postgresql:postgresql:${postgresqlVersion}"
+
+    // Anorm is Not an Object Relational Mapper dependencies
+    compile "org.playframework.anorm:anorm_2.12:${anormVersion}"
+    compile "org.playframework.anorm:anorm-tokenizer_2.12:${anormVersion}"
+    compile "org.playframework.anorm:anorm-akka_2.12:${anormVersion}"
+    compile "org.playframework.anorm:anorm-postgres_2.12:${anormVersion}"
+    compile "org.playframework.anorm:anorm-iteratee_2.12:${anormVersion}"
+
+    //slick library dependencies
+    compile "com.typesafe.slick:slick_2.12:${slickVersion}"
+    compile "com.typesafe.slick:slick-hikaricp_2.12:${slickVersion}"
+    testCompile "com.typesafe.slick:slick-testkit_2.12:${slickVersion}"
+    compile "com.typesafe.slick:slick-codegen_2.12:${slickVersion}"
+
 
 
     // object relationship mapping dependencies
@@ -231,7 +258,7 @@ distributions {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "4.4.1"
+    gradleVersion = "4.5-rc-1"
 }
 
 junitPlatform {
