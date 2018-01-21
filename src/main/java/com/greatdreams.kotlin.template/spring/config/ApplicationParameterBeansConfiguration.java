@@ -15,6 +15,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertiesPropertySource;
+import org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean;
 
 @Configuration
 public class ApplicationParameterBeansConfiguration {
@@ -28,6 +29,7 @@ public class ApplicationParameterBeansConfiguration {
         Config  config = ConfigFactory.load();
         return config;
     }
+
     @Bean
     @Autowired
     @Lazy(false)
