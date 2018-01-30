@@ -23,5 +23,4 @@ object MainClass {
         log.info(applicationInformation.toString())
         log.info("The main program exits normally.")
     }
-
 }

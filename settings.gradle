@@ -1,1 +1,3 @@
 rootProject.name = 'simple-kotlin-application-template-with-gradle'
+include 'rxkotlin-example'
+include 'functional-example'
