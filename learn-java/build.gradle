@@ -1,0 +1,5 @@
+version = '0.0.1'
+
+mainClassName = 'com.greatdream.learn.java.template.MainProgram'
+
+applicationDefaultJvmArgs = ['-Dfile.encoding=US-ASCII']

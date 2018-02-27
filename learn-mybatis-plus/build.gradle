@@ -1,0 +1,8 @@
+
+mainClassName = 'com.greatdreams.learn.mybatis.plus.MainClass'
+//applicationDefaultJvmArgs = [】
+
+ext.mybatisPlusVersion = '2.1.5'
+dependencies {
+    compile "com.baomidou:mybatis-plus:${mybatisPlusVersion}"
+}

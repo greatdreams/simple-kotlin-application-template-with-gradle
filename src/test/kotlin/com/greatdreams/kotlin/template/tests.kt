@@ -24,6 +24,22 @@ object SimpleSpec: Spek({
         }
 )
 
+object StringSpec: Spek({
+
+    xdescribe("String") {
+        on("=") {
+            val a = "0";
+            it("should work") {
+                a == "0"
+            }
+            it("should also work") {
+                a.equals("0")
+            }
+        }
+    }
+}
+)
+
 object CalculatorSpec: Spek({
     given("a calculator") {
         val num = 100

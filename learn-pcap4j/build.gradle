@@ -1,0 +1,12 @@
+ext.pcap4jVersion = '2.0.0-alpha'
+
+dependencies {
+    compile "org.pcap4j:pcap4j-core:${pcap4jVersion}"
+    compile "org.pcap4j:pcap4j-packetfactory-static:${pcap4jVersion}"
+
+    compile "org.pcap4j:pcap4j-packetfactory-propertiesbased:${pcap4jVersion}"
+    compile "org.pcap4j:pcap4j-pcap4j:${pcap4jVersion}"
+
+    testCompile "org.pcap4j:pcap4j-packettest:${pcap4jVersion}"
+
+}

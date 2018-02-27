@@ -1,0 +1,9 @@
+ext.ehcacheVersion = '3.4.0'
+dependencies {
+    compile "org.ehcache:ehcache:${ehcacheVersion}"
+    compile "org.ehcache:ehcache-clustered:${ehcacheVersion}"
+    compile "org.ehcache:ehcache-transactions:${ehcacheVersion}"
+}
+
+mainClassName = 'com.greatdreams.learn.ehcache.MainClass'
+applicationDefaultJvmArgs = []

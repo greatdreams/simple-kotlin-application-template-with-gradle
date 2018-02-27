@@ -2,6 +2,7 @@ package com.greatdreams.kotlin.template
 
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
+import java.nio.charset.Charset
 
 /**
  * @author Greatdreams
@@ -21,6 +22,7 @@ object MainClass {
         val applictionConfig = ctx.getBean("applicationConfiguration")
         val applicationInformation = ctx.getBean("applicationInformation")
         log.info(applicationInformation.toString())
+        log.info(Charset.forName("gb2312").displayName())
         log.info("The main program exits normally.")
     }
 }
