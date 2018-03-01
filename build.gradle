@@ -1,6 +1,10 @@
 buildscript {
-    ext.kotlin_version = '1.2.21'
-    ext.dokka_version = "0.9.16"
+    ext.kotlinVersion = '1.2.21'
+    ext.dokkaVersion = '0.9.16'
+    ext.junitGradleVersion = '1.1.0'
+    ext.ospackagePlugin = '4.7.5'
+    ext.asciidoctorGradleVersion = '1.5.7'
+
     repositories {
         jcenter()
         mavenCentral()
@@ -9,18 +13,20 @@ buildscript {
             url "https://plugins.gradle.org/m2/"
         }
     }
+
     dependencies {
         // plugins for documenting of kotlin source code
         classpath 'com.kncept.junit5.reporter:junit-reporter:1.0.2'
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:${dokka_version}"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.3"
-        classpath 'com.netflix.nebula:gradle-ospackage-plugin:4.4.0'
-        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
-        classpath 'org.asciidoctor:asciidoctorj-epub3:1.5.0-alpha.5.1'
-        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.10.1'
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:${dokkaVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.junit.platform:junit-platform-gradle-plugin:${junitGradleVersion}"
+        classpath "com.netflix.nebula:gradle-ospackage-plugin:${ospackagePlugin}"
+        classpath "org.asciidoctor:asciidoctor-gradle-plugin:${asciidoctorGradleVersion}"
+        classpath 'org.asciidoctor:asciidoctorj-epub3:1.5.0-alpha.8.1'
+        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.16'
     }
 }
+
 group = 'com.greatdreams.kotlin'
 version = '0.0.1'
 
@@ -38,7 +44,6 @@ apply plugin: 'maven-publish'
 
 apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'nebula.ospackage'
-
 
 // get mode with which the project will be built, run, test, and  distributed.
 // mode has three possible value: dev for development(default value),
@@ -67,7 +72,7 @@ project.ext {
     } else {
         mode = "dev"
     }
-    logger.quiet("TIP current project building mode is " + mode)
+    logger.quiet("tip current project building mode is " + mode)
 
 }
 
@@ -111,14 +116,13 @@ distributions {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "4.5.1"
+    gradleVersion = "4.6"
 }
-
 
 //create a single Jar with all dependencies
 task fatJar(type: Jar) {
     manifest {
-        attributes 'Implementation-Title': 'Gradle Jar File Example',
+        attributes 'Implementation-Title': name,
                 'Implementation-Version': version,
                 'Main-Class': 'com.greatdreams.kotlin.template.MainClass'
     }
@@ -166,9 +170,9 @@ allprojects {
     def slf4jVersion = '1.7.25'
     def logbackVersion = "1.2.3"
     def groovyVersion = "2.4.12"
-    def typesafeVersion = '1.3.2'
-    def jacksonYAMLVersion = '2.9.3'
-    def springVersion = '5.0.2.RELEASE'
+    def typesafeVersion = '1.3.3'
+    def jacksonYAMLVersion = '2.9.4'
+    def springVersion = '5.0.4.RELEASE'
     def quartzVersion = "2.3.0"
 
     def hikariCPVersion = '2.7.4'
@@ -180,26 +184,28 @@ allprojects {
 
     def mybatisVersion = '3.4.5'
     def mybatisSpringVersion = '1.3.1'
+
+    def lettuceVerion = '5.0.2.RELEASE'
     def jedisVersion = '2.9.0'
     def rabbitmqVersion = '5.1.1'
-    def httpclientVersion = '4.5.4'
-    def nettyVersion = '4.1.19.Final'
-    def tomcatVersion = '9.0.4'
-    def reactorVersion = '3.1.2.RELEASE'
+    def httpclientVersion = '4.5.5'
+    def nettyVersion = '4.1.22.Final'
+    def tomcatVersion = '9.0.5'
+    def reactorVersion = '3.1.4.RELEASE'
     def commonIOVersion = '2.6'
     def commonTextVersion = '1.2'
-    def akkaVersion = '2.5.8'
-    def akkaHTTPVersion = '10.0.11'
+    def akkaVersion = '2.5.10'
+    def akkaHTTPVersion = '10.1.0-RC2'
 
     def junit4Version = '4.12'
     def junitVintageVersion = '4.12.0'
     def junitJupiterVersion = '5.0.3'
 
     dependencies {
-        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-        compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
-        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-        compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+        compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+        compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 
         compile "com.typesafe:config:${typesafeVersion}"
         compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonYAMLVersion}"
@@ -251,6 +257,7 @@ allprojects {
         // connection for messaging broker dependencies
         compile "redis.clients:jedis:${jedisVersion}"
         compile "com.rabbitmq:amqp-client:${rabbitmqVersion}"
+        compile "io.lettuce:lettuce-core:${lettuceVerion}"
 
         // httpclient dependencies
         compile "org.apache.httpcomponents:httpclient:${httpclientVersion}"
@@ -289,8 +296,8 @@ allprojects {
         compile "ch.qos.logback:logback-access:$logbackVersion"
         compile "org.codehaus.groovy:groovy-all:$groovyVersion"
 
-        testCompile "org.jetbrains.kotlin:kotlin-test:${kotlin_version}"
-        testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}"
+        testCompile "org.jetbrains.kotlin:kotlin-test:${kotlinVersion}"
+        testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
         testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
             exclude group: 'org.jetbrains.kotlin'
         }
@@ -314,7 +321,6 @@ allprojects {
         testCompile "org.amshove.kluent:kluent:$kluentVersion"
         testCompile "com.natpryce:hamkrest:$harmkrest"
         testCompile "com.winterbe:expekt:${winterbVersion}"
-
     }
 
     junitPlatformTest.finalizedBy 'junitHtmlReport'
@@ -324,24 +330,25 @@ allprojects {
             engines {
                 include 'spek', 'junit-jupiter', 'junit-vintage'
             }
+
             /*
             tags {}
             packages {
                 include '', ''
             }
             */
+
             /*
             includeClassNamePattern '.*Spec'
             includeClassNamePatterns '.*Test', '.*Tests'
             */
-            includeClassNamePattern '.*Tests'
 
+            includeClassNamePattern '.*Tests'
         }
 
         junitHtmlReport {
             // If true, then instead of producing multiple reports per test folder (test run),
             // aggregate them all together into the test-reports root directory.
-            //
             // Also use this if all your test results end up directly in the test-results directory
             aggregated = false
 
@@ -362,27 +369,28 @@ allprojects {
         reportsDir file('build/test-results/junit-platform')
 
         /*
-         selectors {
-        uris 'file:///foo.txt', 'http://example.com/'
-        uri 'foo:resource'
-        files 'foo.txt', 'bar.csv'
-        file 'qux.json'
-        directories 'foo/bar', 'bar/qux'
-        directory 'qux/bar'
-        packages 'com.acme.foo', 'com.acme.bar'
-        aPackage 'com.example.app'
-        classes 'com.acme.Foo', 'com.acme.Bar'
-        aClass 'com.example.app.Application'
-        methods 'com.acme.Foo#a', 'com.acme.Foo#b'
-        method 'com.example.app.Application#run(java.lang.String[])'
-        resources '/bar.csv', '/foo/input.json'
-        resource '/com/acme/my.properties'
+        selectors {
+            uris 'file:///foo.txt', 'http://example.com/'
+            uri 'foo:resource'
+            files 'foo.txt', 'bar.csv'
+            file 'qux.json'
+            directories 'foo/bar', 'bar/qux'
+            directory 'qux/bar'
+            packages 'com.acme.foo', 'com.acme.bar'
+            aPackage 'com.example.app'
+            classes 'com.acme.Foo', 'com.acme.Bar'
+            aClass 'com.example.app.Application'
+            methods 'com.acme.Foo#a', 'com.acme.Foo#b'
+            method 'com.example.app.Application#run(java.lang.String[])'
+            resources '/bar.csv', '/foo/input.json'
+            resource '/com/acme/my.properties'
         }
-         */
+        */
+
         configurationParameter 'junit.jupiter.conditions.deactivate', '*'
         configurationParameters([
                 'junit.jupiter.extensions.autodetection.enabled': 'true',
-                'junit.jupiter.testinstance.lifecycle.default': 'per_class'
+                'junit.jupiter.testinstance.lifecycle.default'  : 'per_class'
         ])
     }
 
@@ -393,7 +401,7 @@ allprojects {
         }
     }
 
-// dokka configuration
+    // dokka configuration
     dokka {
         moduleName = "data"
         outputFormat = 'javadoc'
@@ -401,6 +409,7 @@ allprojects {
         processConfigurations = ['compile']
         includes = []
         samples = []
+
         linkMapping {
             dir = 'src/main/kotlin'
             url = 'https://github.com/cy6erGn0m/vertx3-lang-kotlin/blob/master/src/main/kotlin'
@@ -409,23 +418,25 @@ allprojects {
         sourceDirs = files('src/main/kotlin')
     }
 
-// pom file name
+    // pom file name
     ext {
         pomFilePath = "${project.projectDir}/tmp/pom.xml"
         pomFile = file(pomFilePath)
     }
 
-// javadoc.jar generation
+    // javadoc.jar generation
     task javadocJar(type: Jar, dependsOn: javadoc) {
         classifier = 'javadoc'
         from javadoc.destinationDir
     }
-// sources.jar generation
+
+    // sources.jar generation
     task sourceJar(type: Jar) {
         classifier = 'sources'
         from sourceSets.main.allSource
     }
-// summarize artifacts
+
+    // summarize artifacts
     artifacts {
         archives jar
         archives sourceJar
@@ -437,30 +448,44 @@ allprojects {
     }
 
     publishing {
+
         publications {
             app(MavenPublication) {
                 from components.java
-                artifactId 'simiple-kotlin-application-template-with-gradle'
+                artifactId project.name
+
+                artifact sourceJar {
+                    classifier "sources"
+                }
+
+                artifact javadocJar {
+                    classifier "javadoc"
+                }
             }
         }
+
         repositories {
+
             maven {
                 name 'localRepo'
-                url "file://$projectDir/repo"
+                url "file://${project.buildDir}/repo"
             }
+
             maven {
                 name 'labRepo'
+
                 credentials {
                     username = "${username}"
                     password = "${password}"
                 }
+
                 url "http://nexus.buptnsrc.com/content/repositories/thirdparty/"
             }
         }
     }
 
     task packageDeb(type: Deb) {
-        packageName = 'com.greatdreams.java.getstarted'
+        packageName = 'com.greatdreams.kotlin.template'
         version = '0.0.1'
         release = 2
 
@@ -475,7 +500,7 @@ allprojects {
         requires('baz', '1.0.1')
         requires('qux')
 
-        into '/opt/javaapp-getstarted'
+        into "/opt/${project.name}"
 
         from(jar.outputs.files) {
             into 'lib'
@@ -536,7 +561,7 @@ allprojects {
         requires('baz', '1.0.1', LESS)
         requires('qux')
 
-        into '/opt/javaapp-getstarted'
+        into "/opt/${project.name}"
 
         from(jar.outputs.files) {
             into 'lib'
@@ -579,48 +604,9 @@ subprojects {
 }
 
 project(':rxkotlin-example') {
-    version = '0.1'
-
-    mainClassName = 'com.greatdreams.kotlin.example.rxkotlin.MainClass'
-    //applicationDefaultJvmArgs = [】
-
-    def rxKotlinVersion = '2.2.0'
-    dependencies {
-        compile "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
-    }
 }
 
 project(':functional-example') {
-    version = '0.1'
-
-    mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
-    //applicationDefaultJvmArgs = [】
-
-    def arrowVersion = '0.6.0'
-    def resultVersion = '1.3.0'
-    def funKTionaleVersion = '1.2'
-    def kotlinxCoroutineVersion = '0.21.2'
-    dependencies {
-
-        compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutineVersion}"
-        compile "org.funktionale:funktionale-all:${funKTionaleVersion}"
-
-        compile "com.github.kittinunf.result:result:${resultVersion}"
-        compile "io.arrow-kt:arrow-core:${arrowVersion}"
-        compile "io.arrow-kt:arrow-optics:${arrowVersion}"
-        compile "io.arrow-kt:arrow-typeclasses:${arrowVersion}"
-        compile "io.arrow-kt:arrow-mtl:${arrowVersion}"
-        compile "io.arrow-kt:arrow-effects-kotlinx-coroutines:${arrowVersion}"
-        compile "io.arrow-kt:arrow-effects:${arrowVersion}"
-        compile "io.arrow-kt:arrow-free:${arrowVersion}"
-        compile "io.arrow-kt:arrow-instances:${arrowVersion}"
-        compile "io.arrow-kt:arrow-data:${arrowVersion}"
-        compile "io.arrow-kt:arrow-syntax:${arrowVersion}"
-        compile "io.arrow-kt:arrow-annotations-processor:${arrowVersion}"
-        compile "io.arrow-kt:arrow-annotations:${arrowVersion}"
-        testCompile "io.arrow-kt:arrow-effects:${arrowVersion}"
-        testCompile "io.arrow-kt:arrow-test:${arrowVersion}"
-    }
 }
 
 project(':kotlin-example') {
@@ -637,17 +623,17 @@ project(':learn-java') {
     version = '0.0.1'
 }
 
-project('spring-example') {
+project(':learn-spring-example') {
     version = '0.0.1'
 }
-project('learn-spring') {
-    version = '0.0.1'
-}
-
-project('learn-pcap4j') {
+project(':learn-spring') {
     version = '0.0.1'
 }
 
-project('learn-template') {
+project(':learn-pcap4j') {
+    version = '0.0.1'
+}
+
+project(':learn-template') {
     version = '0.0.1'
 }

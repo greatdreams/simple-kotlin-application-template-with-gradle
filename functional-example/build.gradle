@@ -1,0 +1,30 @@
+version = '0.1'
+
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def arrowVersion = '0.6.0'
+def resultVersion = '1.3.0'
+def funKTionaleVersion = '1.2'
+def kotlinxCoroutineVersion = '0.21.2'
+dependencies {
+
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutineVersion}"
+    compile "org.funktionale:funktionale-all:${funKTionaleVersion}"
+
+    compile "com.github.kittinunf.result:result:${resultVersion}"
+    compile "io.arrow-kt:arrow-core:${arrowVersion}"
+    compile "io.arrow-kt:arrow-optics:${arrowVersion}"
+    compile "io.arrow-kt:arrow-typeclasses:${arrowVersion}"
+    compile "io.arrow-kt:arrow-mtl:${arrowVersion}"
+    compile "io.arrow-kt:arrow-effects-kotlinx-coroutines:${arrowVersion}"
+    compile "io.arrow-kt:arrow-effects:${arrowVersion}"
+    compile "io.arrow-kt:arrow-free:${arrowVersion}"
+    compile "io.arrow-kt:arrow-instances:${arrowVersion}"
+    compile "io.arrow-kt:arrow-data:${arrowVersion}"
+    compile "io.arrow-kt:arrow-syntax:${arrowVersion}"
+    compile "io.arrow-kt:arrow-annotations-processor:${arrowVersion}"
+    compile "io.arrow-kt:arrow-annotations:${arrowVersion}"
+    testCompile "io.arrow-kt:arrow-effects:${arrowVersion}"
+    testCompile "io.arrow-kt:arrow-test:${arrowVersion}"
+}

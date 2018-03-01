@@ -1,3 +1,2 @@
-dependencies {
-
-}
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】

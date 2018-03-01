@@ -6,6 +6,10 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.Charset;
 import java.util.SortedMap;
 
+/**
+ * @author greatdreams
+ * @since 0.0.1
+ */
 public class MainProgram {
     private static Logger logger = LoggerFactory.getLogger(MainProgram.class);
 

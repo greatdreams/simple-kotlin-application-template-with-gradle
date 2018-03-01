@@ -25,3 +25,6 @@ $ ./gradlew clean assembleDist -PbuildMode=prod
 6. [Typesafe Config Library](https://github.com/lightbend/config)
 7. [common text](http://commons.apache.org/proper/commons-text/userguide.html)
 8. [http components](https://projects.apache.org/project.html?httpcomponents-client)
+9. [Lettuce](https://lettuce.io/docs/) 
+   
+   Advanced Redis client for thread-safe sync, async, and reactive usage. Supports Cluster, Sentinel, Pipelining, and codecs.

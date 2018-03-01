@@ -2,20 +2,15 @@ rootProject.name = 'simple-kotlin-application-template-with-gradle'
 
 include 'rxkotlin-example'
 include 'functional-example'
-
 include 'kotlin-example'
 include 'learn-kotlin'
-
 include 'java-example'
 include 'learn-java'
-
 include 'spring-example'
+project(":spring-example").name = 'learn-spring-example'
 include 'learn-spring'
-
 include 'learn-pcap4j'
-
 include 'learn-template'
-
 include 'learn-mybatis-plus'
-
 include 'learn-ehcache'
+
