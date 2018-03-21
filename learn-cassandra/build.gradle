@@ -1,0 +1,8 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def cassandraVersion = '3.11.2'
+
+dependencies {
+    compile "org.apache.cassandra:cassandra-all:${cassandraVersion}"
+}

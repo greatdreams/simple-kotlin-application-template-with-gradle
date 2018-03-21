@@ -1,9 +1,12 @@
 
-mainClassName = 'com.greatdreams.learn.kotlin.coroutine.MainProgram'
+mainClassName = 'com.greatdreams.learn.vertx.MainProgram'
 // applicationDefaultJvmArgs = [】
 
 def kotlinxCoroutineVersion = '0.22.5'
 def korVersion = '0.15.1'
+def vertxVersion = '3.5.1'
+
+sourceCompatibility = '1.8'
 
 dependencies {
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutineVersion}"
@@ -19,5 +22,22 @@ dependencies {
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-guava:${kotlinxCoroutineVersion}"
 
     compile "com.soywiz:korio:$korVersion"
+
+    compile "io.vertx:vertx-core:${vertxVersion}"
+    compile "io.vertx:vertx-config:${vertxVersion}"
+    compile "io.vertx:vertx-unit:${vertxVersion}"
+    compile "io.vertx:vertx-web:${vertxVersion}"
+    compile "io.vertx:vertx-web-client:${vertxVersion}"
+    compile "io.vertx:vertx-codegen:${vertxVersion}"
+    compile "io.vertx:vertx-docgen:${vertxVersion}"
+    compile "io.vertx:vertx-hazelcast:${vertxVersion}"
+    compile "io.vertx:vertx-rx-java:${vertxVersion}"
+    compile "io.vertx:vertx-lang-kotlin:${vertxVersion}"
+    compile "io.vertx:vertx-lang-kotlin-coroutines:${vertxVersion}"
+    compile "io.vertx:vertx-lang-kotlin-compiler:${vertxVersion}"
+    compile "io.vertx:vertx-lang-scala_2.12:${vertxVersion}"
+    compile "io.vertx:vertx-service-proxy:${vertxVersion}"
+    compile "io.vertx:vertx-service-discovery:${vertxVersion}"
+    compile "io.vertx:vertx-service-factory:${vertxVersion}"
 
 }

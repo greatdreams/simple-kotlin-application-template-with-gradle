@@ -1,0 +1,11 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def hiveVersion = '2.3.2'
+dependencies {
+    compile "org.apache.hive:hive-jdbc:${hiveVersion}"
+    compile "org.apache.hive:hive-common:${hiveVersion}"
+    compile "org.apache.hive:hive-service:${hiveVersion}"
+    compile "org.apache.hive:hive-exec:${hiveVersion}"
+    compile "org.apache.hive:hive-metastore:${hiveVersion}"
+}

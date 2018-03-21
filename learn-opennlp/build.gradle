@@ -1,0 +1,14 @@
+mainClassName = 'com.greatdreams.learn.opennlp.MainProgram'
+
+// applicationDefaultJvmArgs = [】
+
+def opennlpVersion = '1.8.4'
+dependencies {
+    compile "org.apache.opennlp:opennlp-tools:${opennlpVersion}"
+    compile "org.apache.opennlp:opennlp-uima:${opennlpVersion}"
+    compile "org.apache.opennlp:opennlp-brat-annotator:${opennlpVersion}"
+    compile "org.apache.opennlp:opennlp-morfologik-addon:${opennlpVersion}"
+    compile "org.apache.opennlp:opennlp:${opennlpVersion}"
+    compile "org.apache.opennlp:opennlp-distr:${opennlpVersion}"
+    compile "org.apache.opennlp:opennlp-docs:${opennlpVersion}"
+}
