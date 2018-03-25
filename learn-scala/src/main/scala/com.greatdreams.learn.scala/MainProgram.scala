@@ -1,6 +1,7 @@
 package com.greatdreams.learn.scala
 
 import com.greatdreams.learn.scala.`implicit`.{ImplicitClassTest, ImplicitTest}
+import com.greatdreams.learn.scala.internal.dsl.CurrencyDSLTest
 import org.slf4j.{Logger, LoggerFactory}
 
 object MainProgram {
@@ -10,5 +11,6 @@ object MainProgram {
 
     ImplicitTest.main(args)
     ImplicitClassTest.main(args)
+    CurrencyDSLTest.main(args)
   }
 }
