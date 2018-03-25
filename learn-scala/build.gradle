@@ -1,0 +1,6 @@
+mainClassName = 'com.greatdreams.learn.scala.MainProgram'
+// applicationDefaultJvmArgs = [】
+
+dependencies {
+
+}

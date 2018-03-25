@@ -8,8 +8,6 @@ object MainClass {
     @JvmStatic fun main(args: Array<String>) {
         log.info("The main program begins to run.")
 
-
-
         log.info("The main program exits normally.")
     }
 }

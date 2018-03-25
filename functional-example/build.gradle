@@ -3,10 +3,11 @@ version = '0.1'
 mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
 // applicationDefaultJvmArgs = [】
 
-def arrowVersion = '0.6.1d '
+def arrowVersion = '0.6.1'
 def resultVersion = '1.3.0'
 def funKTionaleVersion = '1.2'
-def kotlinxCoroutineVersion = '0.21.2'
+def kotlinxCoroutineVersion = '0.22.5'
+def kovenantVersion = '3.3.0'
 dependencies {
 
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutineVersion}"
@@ -25,6 +26,10 @@ dependencies {
     compile "io.arrow-kt:arrow-syntax:${arrowVersion}"
     compile "io.arrow-kt:arrow-annotations-processor:${arrowVersion}"
     compile "io.arrow-kt:arrow-annotations:${arrowVersion}"
+
+    compile "nl.komponents.kovenant:kovenant:${kovenantVersion}"
+
     testCompile "io.arrow-kt:arrow-effects:${arrowVersion}"
     testCompile "io.arrow-kt:arrow-test:${arrowVersion}"
+
 }

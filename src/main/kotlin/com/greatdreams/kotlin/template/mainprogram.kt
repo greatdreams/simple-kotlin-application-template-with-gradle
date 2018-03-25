@@ -1,8 +1,6 @@
 package com.greatdreams.kotlin.template
 
 import org.slf4j.LoggerFactory
-import org.springframework.context.annotation.AnnotationConfigApplicationContext
-import java.nio.charset.Charset
 
 /**
  * @author Greatdreams
@@ -14,6 +12,7 @@ object MainClass {
 
     @JvmStatic fun main(args: Array<String>) {
         log.info("The main program begins to run.")
+        /*
         val ctx = AnnotationConfigApplicationContext("com.greatdreams.kotlin.template.spring.config")
         val beanNames = ctx.beanDefinitionNames
         beanNames.forEach{ name ->
@@ -23,6 +22,7 @@ object MainClass {
         val applicationInformation = ctx.getBean("applicationInformation")
         log.info(applicationInformation.toString())
         log.info(Charset.forName("gb2312").displayName())
+        */
         log.info("The main program exits normally.")
     }
 }

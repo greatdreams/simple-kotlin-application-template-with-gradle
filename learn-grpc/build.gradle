@@ -1,0 +1,8 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def grpcVersion = '1.10.0'
+dependencies {
+    compile "io.grpc:grpc-all:${grpcVersion}"
+    testCompile "io.grpc:grpc-testing:${grpcVersion}"
+}

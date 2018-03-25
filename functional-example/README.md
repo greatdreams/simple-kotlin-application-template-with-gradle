@@ -13,3 +13,4 @@
 4. [Kotlin/kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)
    
     Libraries built upon Kotlin coroutines
+5. [kovenant](https://github.com/mplatvoet/kovenant)    
