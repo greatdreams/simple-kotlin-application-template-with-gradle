@@ -162,6 +162,13 @@ allprojects {
     }
 
     repositories {
+        maven {
+            url 'https://repo.huaweicloud.com/repository/maven/'
+            credentials {
+                username 'greatdreams'
+                password 'Hd-0_Ct0u_R'
+            }
+        }
         mavenCentral()
         maven { url "http://jcenter.bintray.com/" }
         maven { url "http://dl.bintray.com/jetbrains/spek" }
