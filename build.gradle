@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlinVersion = '1.2.30'
+    ext.kotlinVersion = '1.2.31'
     ext.dokkaVersion = '0.9.16'
     ext.junitGradleVersion = '1.1.0'
     ext.ospackagePlugin = '4.7.5'
@@ -224,7 +224,7 @@ allprojects {
 
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
-        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+        // compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
         compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 
         compile "com.typesafe:config:${typesafeVersion}"
