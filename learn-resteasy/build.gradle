@@ -1,0 +1,22 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def resteasyVersion = "3.5.0.Final"
+
+dependencies {
+    compile "org.jboss.resteasy:resteasy-jaxrs:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-client:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-crypto:${resteasyVersion}"
+    compile "org.jboss.resteasy:jose-jwt:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-oauth:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-cache-core:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-spring:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-guice:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-servlet-initializer:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-jackson2-provider:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-multipart-provider:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-jaxrs:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-netty:${resteasyVersion}"
+    compile "org.jboss.resteasy:resteasy-undertow:${resteasyVersion}"
+    compile "org.jboss.resteasy:tjws:${resteasyVersion}"
+}
