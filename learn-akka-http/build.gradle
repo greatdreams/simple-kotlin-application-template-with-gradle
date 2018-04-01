@@ -1,0 +1,8 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def akkaHTTPVersion = '10.1.0'
+dependencies {
+    compile "com.typesafe.akka:akka-http_2.12:${akkaHTTPVersion}"
+    testCompile "com.typesafe.akka:akka-http-testkit_2.12:${akkaHTTPVersion}"
+}

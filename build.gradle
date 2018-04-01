@@ -33,7 +33,7 @@ version = '0.0.1'
 apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'org.jetbrains.dokka'
-apply plugin: 'scala'
+// apply plugin: 'scala'
 apply plugin: 'groovy'
 
 apply plugin: 'application'
@@ -135,7 +135,7 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'kotlin'
     apply plugin: 'org.jetbrains.dokka'
-    apply plugin: 'scala'
+    // apply plugin: 'scala'
     apply plugin: 'groovy'
     apply plugin: 'application'
     apply plugin: 'org.junit.platform.gradle.plugin'
@@ -216,11 +216,11 @@ allprojects {
     def junitJupiterVersion = '5.1.0'
 
     dependencies {
-        compile "org.scala-lang:scala-compiler:${scalaVersion}"
-        compile "org.scala-lang:scala-library:${scalaVersion}"
-        compile "org.scala-lang:scala-reflect:${scalaVersion}"
+        // compile "org.scala-lang:scala-compiler:${scalaVersion}"
+        // compile "org.scala-lang:scala-library:${scalaVersion}"
+        // compile "org.scala-lang:scala-reflect:${scalaVersion}"
         // Declare the dependency for your favourite test framework you want to use in your tests.
-        testCompile "org.scalatest:scalatest_2.12:${scalaTestVersion}"
+        // testCompile "org.scalatest:scalatest_2.12:${scalaTestVersion}"
 
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
@@ -243,6 +243,7 @@ allprojects {
         compile "org.postgresql:postgresql:${postgresqlVersion}"
 
         // Anorm is Not an Object Relational Mapper dependencies
+        /*
         compile "org.playframework.anorm:anorm_2.12:${anormVersion}"
         compile "org.playframework.anorm:anorm-tokenizer_2.12:${anormVersion}"
         compile "org.playframework.anorm:anorm-akka_2.12:${anormVersion}"
@@ -254,7 +255,7 @@ allprojects {
         compile "com.typesafe.slick:slick-hikaricp_2.12:${slickVersion}"
         testCompile "com.typesafe.slick:slick-testkit_2.12:${slickVersion}"
         compile "com.typesafe.slick:slick-codegen_2.12:${slickVersion}"
-
+        */
         // object relationship mapping dependencies
         compile "org.mybatis:mybatis:${mybatisVersion}"
         compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
@@ -280,19 +281,6 @@ allprojects {
         // apache common components dependencies
         compile "commons-io:commons-io:${commonIOVersion}"
         compile "org.apache.commons:commons-text:${commonTextVersion}"
-
-        // akka library dependencies
-        compile "com.typesafe.akka:akka-actor_2.12:${akkaVersion}"
-        testCompile "com.typesafe.akka:akka-testkit_2.12:${akkaVersion}"
-        compile "com.typesafe.akka:akka-stream_2.12:${akkaVersion}"
-        testCompile "com.typesafe.akka:akka-stream-testkit_2.12:${akkaVersion}"
-        compile "com.typesafe.akka:akka-stream_2.12:${akkaVersion}"
-        compile "com.typesafe.akka:akka-cluster-sharding_2.12:${akkaVersion}"
-        compile "com.typesafe.akka:akka-distributed-data_2.12:${akkaVersion}"
-        compile "com.typesafe.akka:akka-persistence_2.12:${akkaVersion}"
-
-        compile "com.typesafe.akka:akka-http_2.12:${akkaHTTPVersion}"
-        testCompile "com.typesafe.akka:akka-http-testkit_2.12:${akkaHTTPVersion}"
 
         compile "org.slf4j:slf4j-api:${slf4jVersion}"
         compile "org.slf4j:jul-to-slf4j:${slf4jVersion}"
