@@ -1,0 +1,19 @@
+plugins {
+    id "org.gretty" version "2.1.0"
+}
+
+def springVersion = "5.0.5.RELEASE"
+dependencies {
+    compile "org.springframework:spring-webflux:${springVersion}"
+    compile "org.springframework:spring-context:${springVersion}"
+    compile "org.springframework:spring-context-support:${springVersion}"
+}
+
+gretty {
+    servletContainer = "tomcat9"
+    contextPath = "/"
+    host = "127.0.0.1"
+    httpPort = 8090
+    httpsEnabled = true
+    loggingLevel="DEBUG"
+}
