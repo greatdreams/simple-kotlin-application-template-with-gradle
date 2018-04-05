@@ -10,6 +10,6 @@ dependencies {
     compile "org.apache.hbase:hbase-client:${hbaseVersion}"
     compile "org.apache.hbase:hbase-protocol:${hbaseVersion}"
     compile "org.apache.hbase:hbase-hadoop2-compat:${hbaseVersion}"
-    compile "org.apache.hbase:hbase-mapreduce:${hbaseVersion}"
+    // compile "org.apache.hbase:hbase-mapreduce:${hbaseVersion}"
 
 }

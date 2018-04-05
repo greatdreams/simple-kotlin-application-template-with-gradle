@@ -1,0 +1,21 @@
+mainClassName = 'com.greatdreams.learn.scalanlp.MainProgram'
+// applicationDefaultJvmArgs = [】
+
+
+apply plugin: "scala"
+
+def scalaVersion = '2.12.5'
+def scalaTestVersion = '3.0.4'
+def breezeVersion = "1.0-RC2"
+def epicVersion = "0.4.5"
+dependencies {
+    compile "org.scalanlp:breeze_2.12:${breezeVersion}"
+    compile "org.scalanlp:epic_2.12:${epicVersion}"
+
+    compile "org.scala-lang:scala-compiler:${scalaVersion}"
+    compile "org.scala-lang:scala-library:${scalaVersion}"
+    compile "org.scala-lang:scala-reflect:${scalaVersion}"
+    // Declare the dependency for your favourite test framework you want to use in your tests.
+    testCompile "org.scalatest:scalatest_2.12:${scalaTestVersion}"
+
+}

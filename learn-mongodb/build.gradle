@@ -1,0 +1,7 @@
+mainClassName = 'com.greatdreams.learn.mongodb.MainProgram'
+// applicationDefaultJvmArgs = [】
+
+def mongodbVersion = "3.6.3"
+dependencies {
+    compile "org.mongodb:mongodb-driver:${mongodbVersion}"
+}

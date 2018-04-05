@@ -162,6 +162,10 @@ allprojects {
     }
 
     repositories {
+        mavenCentral()
+        maven { url "http://jcenter.bintray.com/" }
+        maven { url "http://dl.bintray.com/jetbrains/spek" }
+        maven { url "https://dl.bintray.com/kotlin/kotlin-dev/" }
         maven {
             url 'https://repo.huaweicloud.com/repository/maven/'
             credentials {
@@ -169,10 +173,6 @@ allprojects {
                 password 'Hd-0_Ct0u_R'
             }
         }
-        mavenCentral()
-        maven { url "http://jcenter.bintray.com/" }
-        maven { url "http://dl.bintray.com/jetbrains/spek" }
-        maven { url "https://dl.bintray.com/kotlin/kotlin-dev/" }
 
     }
 

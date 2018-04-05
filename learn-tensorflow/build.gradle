@@ -1,0 +1,7 @@
+mainClassName = 'com.greatdreams.learn.tensorflow.MainProgram'
+// applicationDefaultJvmArgs = [】
+
+def tensorflowVersion = '1.7.0'
+dependencies {
+    compile "org.tensorflow:tensorflow:${tensorflowVersion}"
+}
