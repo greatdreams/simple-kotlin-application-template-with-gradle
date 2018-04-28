@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlinVersion = '1.2.31'
+    ext.kotlinVersion = '1.2.40'
     ext.dokkaVersion = '0.9.16'
     ext.junitGradleVersion = '1.1.0'
     ext.ospackagePlugin = '4.7.5'
@@ -33,7 +33,7 @@ version = '0.0.1'
 apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'org.jetbrains.dokka'
-// apply plugin: 'scala'
+apply plugin: 'scala'
 apply plugin: 'groovy'
 
 apply plugin: 'application'
@@ -116,7 +116,7 @@ distributions {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "4.6"
+    gradleVersion = "4.7"
 }
 
 //create a single Jar with all dependencies
@@ -135,9 +135,10 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'kotlin'
     apply plugin: 'org.jetbrains.dokka'
-    // apply plugin: 'scala'
     apply plugin: 'groovy'
-    apply plugin: 'application'
+    if (!it.name.equals("learn-webflux") && !it.name.equals("learn-webmvc")) {
+        apply plugin: 'application'
+    }
     apply plugin: 'org.junit.platform.gradle.plugin'
     apply plugin: 'com.kncept.junit5.reporter'
     apply plugin: 'maven'
@@ -146,7 +147,7 @@ allprojects {
     apply plugin: 'org.asciidoctor.convert'
     apply plugin: 'nebula.ospackage'
 
-    sourceCompatibility = '1.8'
+    sourceCompatibility = '1.9'
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
     kotlin {
@@ -173,28 +174,22 @@ allprojects {
                 password 'Hd-0_Ct0u_R'
             }
         }
-
     }
 
-    def scalaVersion = '2.12.5'
-    def scalaTestVersion = '3.0.4'
     def spekVersion = '1.1.5'
     def kluentVersion = '1.15'
-    def harmkrest = '1.4.0.0'
+    def harmkrest = '1.4.2.2'
     def winterbVersion = '0.5.0'
     def slf4jVersion = '1.7.25'
     def logbackVersion = "1.2.3"
-    def groovyVersion = "2.4.12"
+    def groovyVersion = "3.0.0-alpha-2"
     def typesafeVersion = '1.3.3'
     def jacksonYAMLVersion = '2.9.4'
     def quartzVersion = "2.3.0"
 
-    def hikariCPVersion = '2.7.4'
     def commonsDBCPVersion = '2.2.0'
     def mysqlVersion = '6.0.6'
     def postgresqlVersion = '42.1.4'
-    def anormVersion = '2.6.0'
-    def slickVersion = '3.2.1'
 
     def mybatisVersion = '3.4.5'
     def mybatisSpringVersion = '1.3.1'
@@ -203,29 +198,22 @@ allprojects {
     def jedisVersion = '2.9.0'
     def rabbitmqVersion = '5.1.1'
     def httpclientVersion = '4.5.5'
-    def nettyVersion = '4.1.22.Final'
+
     def tomcatVersion = '9.0.5'
     def reactorVersion = '3.1.4.RELEASE'
     def commonIOVersion = '2.6'
     def commonTextVersion = '1.2'
-    def akkaVersion = '2.5.10'
-    def akkaHTTPVersion = '10.1.0-RC2'
 
     def junit4Version = '4.12'
-    def junitVintageVersion = '4.12.0'
-    def junitJupiterVersion = '5.1.0'
+    def junitVintageVersion = '5.1.1'
+    def junitJupiterVersion = '5.1.1'
 
     dependencies {
-        // compile "org.scala-lang:scala-compiler:${scalaVersion}"
-        // compile "org.scala-lang:scala-library:${scalaVersion}"
-        // compile "org.scala-lang:scala-reflect:${scalaVersion}"
-        // Declare the dependency for your favourite test framework you want to use in your tests.
-        // testCompile "org.scalatest:scalatest_2.12:${scalaTestVersion}"
-
+        compile "org.jetbrains.kotlin:kotlin-compiler:$kotlinVersion"
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-        compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
-        // compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
         compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+        compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
         compile "com.typesafe:config:${typesafeVersion}"
         compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonYAMLVersion}"
@@ -235,27 +223,13 @@ allprojects {
         compile "org.quartz-scheduler:quartz-jobs:${quartzVersion}"
 
         // database pool - hikariCP dependencies
-        compile "com.zaxxer:HikariCP:${hikariCPVersion}"
+        // compile "com.zaxxer:HikariCP:${hikariCPVersion}"
         // database pool - commons-dhcp dependencies
         compile "org.apache.commons:commons-dbcp2:${commonsDBCPVersion}"
         // databases driver dependencies
         compile "mysql:mysql-connector-java:${mysqlVersion}"
         compile "org.postgresql:postgresql:${postgresqlVersion}"
 
-        // Anorm is Not an Object Relational Mapper dependencies
-        /*
-        compile "org.playframework.anorm:anorm_2.12:${anormVersion}"
-        compile "org.playframework.anorm:anorm-tokenizer_2.12:${anormVersion}"
-        compile "org.playframework.anorm:anorm-akka_2.12:${anormVersion}"
-        compile "org.playframework.anorm:anorm-postgres_2.12:${anormVersion}"
-        compile "org.playframework.anorm:anorm-iteratee_2.12:${anormVersion}"
-
-        //slick library dependencies
-        compile "com.typesafe.slick:slick_2.12:${slickVersion}"
-        compile "com.typesafe.slick:slick-hikaricp_2.12:${slickVersion}"
-        testCompile "com.typesafe.slick:slick-testkit_2.12:${slickVersion}"
-        compile "com.typesafe.slick:slick-codegen_2.12:${slickVersion}"
-        */
         // object relationship mapping dependencies
         compile "org.mybatis:mybatis:${mybatisVersion}"
         compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
@@ -268,8 +242,6 @@ allprojects {
         // httpclient dependencies
         compile "org.apache.httpcomponents:httpclient:${httpclientVersion}"
 
-        // netty dependencies
-        compile "io.netty:netty-all:${nettyVersion}"
 
         // tomcat embedded dependencies
         compile "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"
@@ -305,11 +277,8 @@ allprojects {
         testCompile "org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}"
         testCompile "org.junit.jupiter:junit-jupiter-migrationsupport:${junitJupiterVersion}"
 
-
         testCompile "junit:junit:${junit4Version}"
         testCompile "org.junit.vintage:junit-vintage-engine:${junitVintageVersion}"
-
-        testCompile 'org.junit.platform:junit-platform-console:1.0.3'
 
         testCompile "org.amshove.kluent:kluent:$kluentVersion"
         testCompile "com.natpryce:hamkrest:$harmkrest"

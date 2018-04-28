@@ -1,7 +1,11 @@
-mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+mainClassName = 'com.greatdreams.learn.pcap4j.MainProgram'
 // applicationDefaultJvmArgs = [】
 
-ext.pcap4jVersion = '2.0.0-alpha'
+ext.pcap4jVersion = '1.7.3' // '2.0.0-alpha'
+
+run {
+    standardInput = System.in
+}
 
 dependencies {
     compile "org.pcap4j:pcap4j-core:${pcap4jVersion}"

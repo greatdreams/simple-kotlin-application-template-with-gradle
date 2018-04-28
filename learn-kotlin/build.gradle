@@ -1,5 +1,5 @@
 
-mainClassName = 'com.greatdreams.learn.kotlin.coroutine.MainProgram'
+mainClassName = 'com.greatdreams.learn.kotlin.MainProgram'
 // applicationDefaultJvmArgs = [】
 
 def kotlinxCoroutineVersion = '0.22.5'

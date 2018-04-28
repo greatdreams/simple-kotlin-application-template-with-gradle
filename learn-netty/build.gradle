@@ -1,0 +1,8 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def nettyVersion = '4.1.23.Final'
+dependencies {
+    // netty dependencies
+    compile "io.netty:netty-all:${nettyVersion}"
+}

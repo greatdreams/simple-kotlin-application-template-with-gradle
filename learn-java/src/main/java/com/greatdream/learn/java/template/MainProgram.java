@@ -20,9 +20,9 @@ public class MainProgram {
         logger.info("application begins to run");
 
         // availableCharset();
-        // getAllAvailableNetworkInterfaces();
-        byte ip[] = new byte[] { (byte) 10, (byte) 108, (byte)115, (byte)171 };
-        getNetworkInterfaceInfoByAddress(ip);
+        getAllAvailableNetworkInterfaces();
+        // byte ip[] = new byte[] { (byte) 10, (byte) 108, (byte)115, (byte)171 };
+        // getNetworkInterfaceInfoByAddress(ip);
 
         logger.info("application exit normally");
     }

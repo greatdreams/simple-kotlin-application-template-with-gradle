@@ -1,0 +1,19 @@
+/*
+plugins {
+    id 'com.zyxist.chainsaw' version '0.3.1'
+}
+*/
+
+mainClassName = 'com.greatdreams.learn.java10.MainProgram'
+// applicationDefaultJvmArgs = [】
+/*
+javaModule.allowModuleNamingViolations = false
+javaModule.hacks {
+    opens('java.base', 'java.lang', 'com.google.guice')
+    reads('groovy-all', 'ALL-UNNAMED')
+    exports('com.example.mymodule', 'com.example.mymodule.somePackage', 'com.example.anotherModule')
+    patches('com.google.code.findbugs:jsr305', 'jsr250.api')
+}
+*/
+dependencies {
+}
