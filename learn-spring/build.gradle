@@ -1,8 +1,8 @@
 mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
 // applicationDefaultJvmArgs = [】
 
-def springVersion = '5.0.4.RELEASE'
-def springSecurityVersion = '5.0.3.RELEASE'
+def springVersion = '5.0.5.RELEASE'
+def springSecurityVersion = '5.0.4.RELEASE'
 
 dependencies {
     // dependencies related with spring framework
