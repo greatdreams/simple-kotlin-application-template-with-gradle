@@ -3,8 +3,8 @@ mainClassName = 'com.greatdreams.learn.akka.MainProgram'
 
 apply plugin: "scala"
 
-def scalaVersion = '2.12.5'
-def scalaTestVersion = '3.0.4'
+def scalaVersion = '2.12.6'
+def scalaTestVersion = '3.0.5'
 def akkaVersion = '2.5.12'
 
 dependencies {
@@ -17,10 +17,12 @@ dependencies {
     // akka library dependencies
     compile "com.typesafe.akka:akka-actor_2.12:${akkaVersion}"
     compile "com.typesafe.akka:akka-actor-typed_2.12:${akkaVersion}"
+    compile "com.typesafe.akka:akka-slf4j_2.12:${akkaVersion}"
     testCompile "com.typesafe.akka:akka-testkit_2.12:${akkaVersion}"
     compile "com.typesafe.akka:akka-stream_2.12:${akkaVersion}"
     testCompile "com.typesafe.akka:akka-stream-testkit_2.12:${akkaVersion}"
-    compile "com.typesafe.akka:akka-stream_2.12:${akkaVersion}"
+    compile "com.typesafe.akka:akka-remote_2.12:${akkaVersion}"
+    compile "com.typesafe.akka:akka-cluster-tools_2.12:${akkaVersion}"
     compile "com.typesafe.akka:akka-cluster-sharding_2.12:${akkaVersion}"
     compile "com.typesafe.akka:akka-distributed-data_2.12:${akkaVersion}"
     compile "com.typesafe.akka:akka-persistence_2.12:${akkaVersion}"
