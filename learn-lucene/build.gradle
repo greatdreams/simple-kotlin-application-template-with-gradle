@@ -1,7 +1,7 @@
 mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
 // applicationDefaultJvmArgs = [】
 
-def luceneVersion = '7.2.1'
+def luceneVersion = '7.3.1'
 
 dependencies {
     compile "org.apache.lucene:lucene-core:${luceneVersion}"

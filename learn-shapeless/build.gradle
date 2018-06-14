@@ -1,0 +1,7 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def shapelessVersion = '2.3.3'
+dependencies {
+    compile "com.chuusai:shapeless_2.12:${shapelessVersion}"
+}

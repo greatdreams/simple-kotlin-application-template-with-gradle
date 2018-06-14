@@ -46,6 +46,6 @@ public class ByteCharStringTests {
 
     @Test
     public void c() {
-        assertEquals("5 == 5", 5, 6);
+        assertEquals("5 == 5", 5, 5);
     }
 }

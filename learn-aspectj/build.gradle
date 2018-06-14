@@ -1,0 +1,9 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def aspectjVersion = '1.9.1'
+dependencies {
+    compile "org.aspectj:aspectjrt:${aspectjVersion}"
+    compile "org.aspectj:aspectjweaver:${aspectjVersion}"
+    compile "org.aspectj:aspectjtools:${aspectjVersion}"
+}

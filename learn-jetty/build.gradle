@@ -1,0 +1,25 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def jettyVersion = '9.4.10.v20180503'
+
+dependencies {
+    compile "org.eclipse.jetty:jetty-server:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-servlet:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-servlets:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-security:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-http:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-io:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-continuation:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-client:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-plus:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-jmx:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-xml:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-annotations:${jettyVersion}"
+
+    // websocket implementation for jetty server
+    compile "org.eclipse.jetty.websocket:websocket-server:${jettyVersion}"
+    compile "org.eclipse.jetty.websocket:javax-websocket-server-impl:${jettyVersion}"
+    compile "org.eclipse.jetty.websocket:websocket-client:${jettyVersion}"
+    compile "org.eclipse.jetty.websocket:websocket-api:${jettyVersion}"
+}

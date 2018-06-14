@@ -1,0 +1,7 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def rxJavaVersion = '2.1.13'
+dependencies {
+    compile "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+}

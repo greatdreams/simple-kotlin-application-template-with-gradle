@@ -1,15 +1,64 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "gradle.plugin.com.github.maiflai:gradle-scalatest:0.22"
+    }
+}
+
+plugins {
+    id "com.github.maiflai.scalatest" version "0.22"
+}
+
+apply plugin: 'scala'
+apply plugin: 'application'
+
+
+
 mainClassName = 'com.greatdreams.learn.scala.MainProgram'
 // applicationDefaultJvmArgs = [】
 
-apply plugin: 'scala'
-
 def scalaVersion = '2.12.6'
 def scalaTestVersion = '3.0.5'
+def slf4jVersion = '1.7.25'
+def logbackVersion = "1.2.3"
+def groovyVersion = "2.4.12"
+
+repositories {
+    mavenCentral()
+    maven { url "http://jcenter.bintray.com/" }
+    maven { url "http://dl.bintray.com/jetbrains/spek" }
+    maven { url "https://dl.bintray.com/kotlin/kotlin-dev/" }
+    maven {
+        url 'https://repo.huaweicloud.com/repository/maven/'
+        credentials {
+            username 'greatdreams'
+            password 'Hd-0_Ct0u_R'
+        }
+    }
+}
 
 dependencies {
     compile "org.scala-lang:scala-compiler:${scalaVersion}"
     compile "org.scala-lang:scala-library:${scalaVersion}"
     compile "org.scala-lang:scala-reflect:${scalaVersion}"
+
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.slf4j:jul-to-slf4j:${slf4jVersion}"
+    compile "ch.qos.logback:logback-core:$logbackVersion"
+    compile "ch.qos.logback:logback-classic:$logbackVersion"
+    compile "ch.qos.logback:logback-access:$logbackVersion"
+    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+
     // Declare the dependency for your favourite test framework you want to use in your tests.
     testCompile "org.scalatest:scalatest_2.12:${scalaTestVersion}"
+    testCompile "org.pegdown:pegdown:1.4.2"
+}
+
+test {
+    maxParallelForks = 1
 }

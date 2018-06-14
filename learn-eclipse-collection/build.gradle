@@ -1,0 +1,10 @@
+mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
+// applicationDefaultJvmArgs = [】
+
+def eclipseCollectionVersion = '9.2.0.M1'
+dependencies {
+    compile "org.eclipse.collections:eclipse-collections:${eclipseCollectionVersion}"
+    compile "org.eclipse.collections:eclipse-collections-api:${eclipseCollectionVersion}"
+    compile "org.eclipse.collections:eclipse-collections-forkjoin:${eclipseCollectionVersion}"
+    testCompile "org.eclipse.collections:eclipse-collections-testutils:${eclipseCollectionVersion}"
+}

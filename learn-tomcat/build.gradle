@@ -1,7 +1,7 @@
 mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
 // applicationDefaultJvmArgs = [】
 
-def tomcatVersion = '9.0.7'
+def tomcatVersion = '9.0.8'
 dependencies {
     compile "org.apache.tomcat:tomcat-catalina:${tomcatVersion}"
     compile "org.apache.tomcat:tomcat-coyote:${tomcatVersion}"

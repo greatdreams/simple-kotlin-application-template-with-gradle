@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlinVersion = '1.2.41'
+    ext.kotlinVersion = '1.2.50'
     ext.dokkaVersion = '0.9.16'
     ext.junitGradleVersion = '1.1.0'
     ext.ospackagePlugin = '4.7.5'
@@ -116,7 +116,7 @@ distributions {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "4.7"
+    gradleVersion = "4.8"
 }
 
 //create a single Jar with all dependencies
@@ -132,205 +132,210 @@ task fatJar(type: Jar) {
 }
 
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'kotlin'
-    apply plugin: 'org.jetbrains.dokka'
-    apply plugin: 'groovy'
-    if (!it.name.equals("learn-webflux") && !it.name.equals("learn-webmvc")) {
-        apply plugin: 'application'
-    }
-    apply plugin: 'org.junit.platform.gradle.plugin'
-    apply plugin: 'com.kncept.junit5.reporter'
-    apply plugin: 'maven'
-    apply plugin: 'maven-publish'
-
-    apply plugin: 'org.asciidoctor.convert'
-    apply plugin: 'nebula.ospackage'
-
-    sourceCompatibility = '1.9'
-    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
-    kotlin {
-        experimental {
-            coroutines 'enable'
+    if(!it.name.equals("learn-scala") && !it.name.equals("learn-redis")
+            && !it.name.equals("learn-kafka")
+            && !it.name.equals("learn-template-kotlin-dsl")
+            && !it.name.equals("learn-dubbo")
+            && !it.name.equals("learn-snmp4j")
+    ) {
+        apply plugin: 'java'
+        apply plugin: 'kotlin'
+        apply plugin: 'org.jetbrains.dokka'
+        apply plugin: 'groovy'
+        if (!it.name.equals("learn-webflux") && !it.name.equals("learn-webmvc")) {
+            apply plugin: 'application'
         }
-    }
+        apply plugin: 'org.junit.platform.gradle.plugin'
+        apply plugin: 'com.kncept.junit5.reporter'
+        apply plugin: 'maven'
+        apply plugin: 'maven-publish'
 
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-        kotlinOptions {
-            jvmTarget = '1.8'
-        }
-    }
+        apply plugin: 'org.asciidoctor.convert'
+        apply plugin: 'nebula.ospackage'
 
-    repositories {
-        mavenCentral()
-        maven { url "http://jcenter.bintray.com/" }
-        maven { url "http://dl.bintray.com/jetbrains/spek" }
-        maven { url "https://dl.bintray.com/kotlin/kotlin-dev/" }
-        maven {
-            url 'https://repo.huaweicloud.com/repository/maven/'
-            credentials {
-                username 'greatdreams'
-                password 'Hd-0_Ct0u_R'
+        sourceCompatibility = '1.9'
+        [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+        kotlin {
+            experimental {
+                coroutines 'enable'
             }
         }
-    }
 
-    def spekVersion = '1.1.5'
-    def kluentVersion = '1.15'
-    def harmkrest = '1.4.2.2'
-    def winterbVersion = '0.5.0'
-    def slf4jVersion = '1.7.25'
-    def logbackVersion = "1.2.3"
-    def groovyVersion = "3.0.0-alpha-2"
-    def typesafeVersion = '1.3.3'
-    def jacksonYAMLVersion = '2.9.4'
-    def quartzVersion = "2.3.0"
-
-    def commonsDBCPVersion = '2.2.0'
-    def mysqlVersion = '6.0.6'
-    def postgresqlVersion = '42.1.4'
-
-    def mybatisVersion = '3.4.5'
-    def mybatisSpringVersion = '1.3.1'
-
-    def lettuceVerion = '5.0.2.RELEASE'
-    def jedisVersion = '2.9.0'
-    def rabbitmqVersion = '5.1.1'
-    def httpclientVersion = '4.5.5'
-
-    def tomcatVersion = '9.0.5'
-    def reactorVersion = '3.1.4.RELEASE'
-    def commonIOVersion = '2.6'
-    def commonTextVersion = '1.2'
-
-    def junit4Version = '4.12'
-    def junitVintageVersion = '5.1.1'
-    def junitJupiterVersion = '5.1.1'
-
-    dependencies {
-        compile "org.jetbrains.kotlin:kotlin-compiler:$kotlinVersion"
-        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-        compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-        compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
-        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-
-        compile "com.typesafe:config:${typesafeVersion}"
-        compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonYAMLVersion}"
-
-
-        compile "org.quartz-scheduler:quartz:${quartzVersion}"
-        compile "org.quartz-scheduler:quartz-jobs:${quartzVersion}"
-
-        // database pool - hikariCP dependencies
-        // compile "com.zaxxer:HikariCP:${hikariCPVersion}"
-        // database pool - commons-dhcp dependencies
-        compile "org.apache.commons:commons-dbcp2:${commonsDBCPVersion}"
-        // databases driver dependencies
-        compile "mysql:mysql-connector-java:${mysqlVersion}"
-        compile "org.postgresql:postgresql:${postgresqlVersion}"
-
-        // object relationship mapping dependencies
-        compile "org.mybatis:mybatis:${mybatisVersion}"
-        compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
-
-        // connection for messaging broker dependencies
-        compile "redis.clients:jedis:${jedisVersion}"
-        compile "com.rabbitmq:amqp-client:${rabbitmqVersion}"
-        compile "io.lettuce:lettuce-core:${lettuceVerion}"
-
-        // httpclient dependencies
-        compile "org.apache.httpcomponents:httpclient:${httpclientVersion}"
-
-
-        // tomcat embedded dependencies
-        compile "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"
-
-        // reactor dependencies
-        compile "io.projectreactor:reactor-core:${reactorVersion}"
-        compile "io.projectreactor:reactor-test:${reactorVersion}"
-
-        // apache common components dependencies
-        compile "commons-io:commons-io:${commonIOVersion}"
-        compile "org.apache.commons:commons-text:${commonTextVersion}"
-
-        compile "org.slf4j:slf4j-api:${slf4jVersion}"
-        compile "org.slf4j:jul-to-slf4j:${slf4jVersion}"
-        compile "ch.qos.logback:logback-core:$logbackVersion"
-        compile "ch.qos.logback:logback-classic:$logbackVersion"
-        compile "ch.qos.logback:logback-access:$logbackVersion"
-        compile "org.codehaus.groovy:groovy-all:$groovyVersion"
-
-        testCompile "org.jetbrains.kotlin:kotlin-test:${kotlinVersion}"
-        testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
-        testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
-            exclude group: 'org.jetbrains.kotlin'
+        tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+            kotlinOptions {
+                jvmTarget = '1.8'
+            }
         }
 
-        testCompile("org.jetbrains.spek:spek-junit-platform-engine:$spekVersion") {
-            exclude group: 'org.junit.platform'
-            exclude group: 'org.jetbrains.kotlin'
+        repositories {
+            mavenCentral()
+            maven { url "http://jcenter.bintray.com/" }
+            maven { url "http://dl.bintray.com/jetbrains/spek" }
+            maven { url "https://dl.bintray.com/kotlin/kotlin-dev/" }
+            maven {
+                url 'https://repo.huaweicloud.com/repository/maven/'
+                credentials {
+                    username 'greatdreams'
+                    password 'Hd-0_Ct0u_R'
+                }
+            }
         }
 
-        testCompile "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
-        testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
-        testCompile "org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}"
-        testCompile "org.junit.jupiter:junit-jupiter-migrationsupport:${junitJupiterVersion}"
+        def spekVersion = '1.1.5'
+        def kluentVersion = '1.15'
+        def harmkrest = '1.4.2.2'
+        def winterbVersion = '0.5.0'
+        def slf4jVersion = '1.7.25'
+        def logbackVersion = "1.2.3"
+        def groovyVersion = "2.4.12"
+        def typesafeVersion = '1.3.3'
+        def jacksonYAMLVersion = '2.9.4'
+        def quartzVersion = "2.3.0"
 
-        testCompile "junit:junit:${junit4Version}"
-        testCompile "org.junit.vintage:junit-vintage-engine:${junitVintageVersion}"
+        def commonsDBCPVersion = '2.2.0'
+        def mysqlVersion = '6.0.6'
+        def postgresqlVersion = '42.1.4'
 
-        testCompile "org.amshove.kluent:kluent:$kluentVersion"
-        testCompile "com.natpryce:hamkrest:$harmkrest"
-        testCompile "com.winterbe:expekt:${winterbVersion}"
-    }
+        def mybatisVersion = '3.4.5'
+        def mybatisSpringVersion = '1.3.1'
 
-    junitPlatformTest.finalizedBy 'junitHtmlReport'
+        def lettuceVerion = '5.0.2.RELEASE'
+        def jedisVersion = '2.9.0'
+        def rabbitmqVersion = '5.1.1'
+        def httpclientVersion = '4.5.5'
 
-    junitPlatform {
-        filters {
-            engines {
-                include 'spek', 'junit-jupiter', 'junit-vintage'
+        def tomcatVersion = '9.0.5'
+        def reactorVersion = '3.1.4.RELEASE'
+        def commonIOVersion = '2.6'
+        def commonTextVersion = '1.2'
+
+        def junit4Version = '4.12'
+        def junitVintageVersion = '5.1.1'
+        def junitJupiterVersion = '5.1.1'
+
+        dependencies {
+            compile "org.jetbrains.kotlin:kotlin-compiler:$kotlinVersion"
+            compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+            compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+            compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
+            compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+
+            compile "com.typesafe:config:${typesafeVersion}"
+            compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonYAMLVersion}"
+
+
+            compile "org.quartz-scheduler:quartz:${quartzVersion}"
+            compile "org.quartz-scheduler:quartz-jobs:${quartzVersion}"
+
+            // database pool - hikariCP dependencies
+            // compile "com.zaxxer:HikariCP:${hikariCPVersion}"
+            // database pool - commons-dhcp dependencies
+            compile "org.apache.commons:commons-dbcp2:${commonsDBCPVersion}"
+            // databases driver dependencies
+            compile "mysql:mysql-connector-java:${mysqlVersion}"
+            compile "org.postgresql:postgresql:${postgresqlVersion}"
+
+            // object relationship mapping dependencies
+            compile "org.mybatis:mybatis:${mybatisVersion}"
+            compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
+
+            // connection for messaging broker dependencies
+            compile "redis.clients:jedis:${jedisVersion}"
+            compile "com.rabbitmq:amqp-client:${rabbitmqVersion}"
+            compile "io.lettuce:lettuce-core:${lettuceVerion}"
+
+            // httpclient dependencies
+            compile "org.apache.httpcomponents:httpclient:${httpclientVersion}"
+
+            // tomcat embedded dependencies
+            compile "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"
+
+            // reactor dependencies
+            compile "io.projectreactor:reactor-core:${reactorVersion}"
+            compile "io.projectreactor:reactor-test:${reactorVersion}"
+
+            // apache common components dependencies
+            compile "commons-io:commons-io:${commonIOVersion}"
+            compile "org.apache.commons:commons-text:${commonTextVersion}"
+
+            compile "org.slf4j:slf4j-api:${slf4jVersion}"
+            compile "org.slf4j:jul-to-slf4j:${slf4jVersion}"
+            compile "ch.qos.logback:logback-core:$logbackVersion"
+            compile "ch.qos.logback:logback-classic:$logbackVersion"
+            compile "ch.qos.logback:logback-access:$logbackVersion"
+            compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+
+            testCompile "org.jetbrains.kotlin:kotlin-test:${kotlinVersion}"
+            testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
+            testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
+                exclude group: 'org.jetbrains.kotlin'
             }
 
-            /*
+            testCompile("org.jetbrains.spek:spek-junit-platform-engine:$spekVersion") {
+                exclude group: 'org.junit.platform'
+                exclude group: 'org.jetbrains.kotlin'
+            }
+
+            testCompile "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
+            testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
+            testCompile "org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}"
+            testCompile "org.junit.jupiter:junit-jupiter-migrationsupport:${junitJupiterVersion}"
+
+            testCompile "junit:junit:${junit4Version}"
+            testCompile "org.junit.vintage:junit-vintage-engine:${junitVintageVersion}"
+
+            testCompile "org.amshove.kluent:kluent:$kluentVersion"
+            testCompile "com.natpryce:hamkrest:$harmkrest"
+            testCompile "com.winterbe:expekt:${winterbVersion}"
+        }
+
+        junitPlatformTest.finalizedBy 'junitHtmlReport'
+
+        junitPlatform {
+            filters {
+                engines {
+                    include 'spek', 'junit-jupiter', 'junit-vintage'
+                }
+
+                /*
             tags {}
             packages {
                 include '', ''
             }
             */
 
-            /*
+                /*
             includeClassNamePattern '.*Spec'
             includeClassNamePatterns '.*Test', '.*Tests'
             */
 
-            includeClassNamePattern '.*Tests'
-        }
+                includeClassNamePattern '.*Tests'
+            }
 
-        junitHtmlReport {
-            // If true, then instead of producing multiple reports per test folder (test run),
-            // aggregate them all together into the test-reports root directory.
-            // Also use this if all your test results end up directly in the test-results directory
-            aggregated = false
+            junitHtmlReport {
+                // If true, then instead of producing multiple reports per test folder (test run),
+                // aggregate them all together into the test-reports root directory.
+                // Also use this if all your test results end up directly in the test-results directory
+                aggregated = false
 
-            //RAG status css overrides
-            cssRed = 'red'
-            cssAmber = 'orange'
-            cssGreen = 'green'
+                //RAG status css overrides
+                cssRed = 'red'
+                cssAmber = 'orange'
+                cssGreen = 'green'
 
-            //Processing directories
-            testResultsDir = 'test-results'
-            testReportsDir = 'reports/tests'
+                //Processing directories
+                testResultsDir = 'test-results'
+                testReportsDir = 'reports/tests'
 
-            //Fail build when no XML files to process
-            failOnEmpty = true
-        }
+                //Fail build when no XML files to process
+                failOnEmpty = true
+            }
 
-        logManager 'java.util.logging.LogManager'
-        reportsDir file('build/test-results/junit-platform')
+            logManager 'java.util.logging.LogManager'
+            reportsDir file('build/test-results/junit-platform')
 
-        /*
+            /*
         selectors {
             uris 'file:///foo.txt', 'http://example.com/'
             uri 'foo:resource'
@@ -349,215 +354,217 @@ allprojects {
         }
         */
 
-        configurationParameter 'junit.jupiter.conditions.deactivate', '*'
-        configurationParameters([
-                'junit.jupiter.extensions.autodetection.enabled': 'true',
-                'junit.jupiter.testinstance.lifecycle.default'  : 'per_class'
-        ])
-    }
-
-    test {
-        reports {
-            junitXml.enabled = false
-            html.enabled = true
+            configurationParameter 'junit.jupiter.conditions.deactivate', '*'
+            configurationParameters([
+                    'junit.jupiter.extensions.autodetection.enabled': 'true',
+                    'junit.jupiter.testinstance.lifecycle.default'  : 'per_class'
+            ])
         }
-    }
 
-    // dokka configuration
-    dokka {
-        moduleName = "data"
-        outputFormat = 'javadoc'
-        outputDirectory = "$buildDir/javadoc"
-        processConfigurations = ['compile']
-        includes = []
-        samples = []
-
-        linkMapping {
-            dir = 'src/main/kotlin'
-            url = 'https://github.com/cy6erGn0m/vertx3-lang-kotlin/blob/master/src/main/kotlin'
-            suffix = '#L'
+        test {
+            reports {
+                junitXml.enabled = false
+                html.enabled = true
+            }
         }
-        sourceDirs = files('src/main/kotlin')
-    }
 
-    // pom file name
-    ext {
-        pomFilePath = "${project.projectDir}/tmp/pom.xml"
-        pomFile = file(pomFilePath)
-    }
+        // dokka configuration
+        dokka {
+            moduleName = "data"
+            outputFormat = 'javadoc'
+            outputDirectory = "$buildDir/javadoc"
+            processConfigurations = ['compile']
+            includes = []
+            samples = []
 
-    // javadoc.jar generation
-    task javadocJar(type: Jar, dependsOn: javadoc) {
-        classifier = 'javadoc'
-        from javadoc.destinationDir
-    }
-
-    // sources.jar generation
-    task sourceJar(type: Jar) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-
-    // summarize artifacts
-    artifacts {
-        archives jar
-        archives sourceJar
-        archives javadocJar
-
-        if (pomFile.exists()) {
-            pom pomFile
+            linkMapping {
+                dir = 'src/main/kotlin'
+                url = 'https://github.com/cy6erGn0m/vertx3-lang-kotlin/blob/master/src/main/kotlin'
+                suffix = '#L'
+            }
+            sourceDirs = files('src/main/kotlin')
         }
-    }
 
-    publishing {
+        // pom file name
+        ext {
+            pomFilePath = "${project.projectDir}/tmp/pom.xml"
+            pomFile = file(pomFilePath)
+        }
 
-        publications {
-            app(MavenPublication) {
-                from components.java
-                artifactId project.name
+        // javadoc.jar generation
 
-                artifact sourceJar {
-                    classifier "sources"
+        task javadocJar(type: Jar, dependsOn: javadoc) {
+            classifier = 'javadoc'
+            from javadoc.destinationDir
+        }
+
+        // sources.jar generation
+        task sourceJar(type: Jar) {
+            classifier = 'sources'
+            from sourceSets.main.allSource
+        }
+
+        // summarize artifacts
+        artifacts {
+            archives jar
+            archives sourceJar
+            archives javadocJar
+
+            if (pomFile.exists()) {
+                pom pomFile
+            }
+        }
+
+        publishing {
+
+            publications {
+                app(MavenPublication) {
+                    from components.java
+                    artifactId project.name
+
+                    artifact sourceJar {
+                        classifier "sources"
+                    }
+
+                    artifact javadocJar {
+                        classifier "javadoc"
+                    }
+                }
+            }
+
+            repositories {
+
+                maven {
+                    name 'localRepo'
+                    url "file://${project.buildDir}/repo"
                 }
 
-                artifact javadocJar {
-                    classifier "javadoc"
+                maven {
+                    name 'labRepo'
+
+                    credentials {
+                        username = "${username}"
+                        password = "${password}"
+                    }
+
+                    url "http://nexus.buptnsrc.com/content/repositories/thirdparty/"
                 }
             }
         }
 
-        repositories {
+        task packageDeb(type: Deb) {
+            packageName = 'com.greatdreams.kotlin.template'
+            version = '0.0.1'
+            release = 2
 
-            maven {
-                name 'localRepo'
-                url "file://${project.buildDir}/repo"
+            configurationFile('/etc/defaults/myapp')
+            installUtils file('scripts/deb/utils.sh')
+            preInstall file('scripts/deb/preInstall.sh')
+            postInstall file('scripts/deb/postInstall.sh')
+            preUninstall file('scripts/deb/preUninstall.sh')
+            postUninstall file('scripts/deb/postUninstall.sh')
+
+            requires('bar', '2.2')
+            requires('baz', '1.0.1')
+            requires('qux')
+
+            into "/opt/${project.name}"
+
+            from(jar.outputs.files) {
+                into 'lib'
+            }
+            from(configurations.runtime) {
+                into 'lib'
+            }
+            from('lib') {
+                into 'lib'
+            }
+            from('scripts') {
+                into 'bin'
+                exclude 'database'
+                fileMode 0550
+            }
+            from('src/main/resources') {
+                fileType CONFIG | NOREPLACE
+                into 'conf'
+            }
+            from('home') {
+                createDirectoryEntry = true
+                fileMode 0500
+                into 'home'
+            }
+            from('endorsed') {
+                into '/usr/share/tomcat/endorsed'
             }
 
-            maven {
-                name 'labRepo'
+            link('/etc/init.d/foo', '/opt/foo/bin/foo.init')
 
-                credentials {
-                    username = "${username}"
-                    password = "${password}"
-                }
+            customField 'Build-Host', 'http://mycihost'
+            customField([
+                    'Commit-ID': 'deadbeef',
+                    'Owner'    : 'John Doe <johndoe@sweetdomain.io>'
+            ])
+            customFields << [
+                    'Build-Job': 'FooProject'
+            ]
+        }
 
-                url "http://nexus.buptnsrc.com/content/repositories/thirdparty/"
+        task packageRpm(type: Rpm) {
+            packageName 'com.greatdreams.java.getstarted'
+            version '0.0.1'
+            //
+            // release 1
+            arch I386
+            os LINUX
+
+            installUtils = file('scripts/rpm/utils.sh')
+            preInstall file('scripts/rpm/preInstall.sh')
+            postInstall file('scripts/rpm/postInstall.sh')
+            preUninstall file('scripts/rpm/preUninstall.sh')
+            postUninstall file('scripts/rpm/postUninstall.sh')
+            preTrans file('scripts/rpm/preTrans.sh')
+            postTrans file('scripts/rpm/postTrans.sh')
+
+            requires('bar', '2.2', GREATER | EQUAL)
+            requires('baz', '1.0.1', LESS)
+            requires('qux')
+
+            into "/opt/${project.name}"
+
+            from(jar.outputs.files) {
+                into 'lib'
             }
-        }
-    }
+            from(configurations.runtime) {
+                into 'lib'
+            }
+            from('lib') {
+                into 'lib'
+            }
+            from('scripts') {
+                into 'bin'
+                exclude 'database'
+                fileMode 0550
+            }
+            from('src/main/resources') {
+                fileType CONFIG | NOREPLACE
+                into 'conf'
+            }
+            from('home') {
+                // Creating directory entries (or not) in the RPM is normally left up to redline-rpm library.
+                // Use this to explicitly create an entry -- for setting directory fileMode on system directories.
+                createDirectoryEntry = true
+                fileMode 0500
+                into 'home'
+            }
+            from('endorsed') {
+                // Will tell redline-rpm not to auto create directories, which
+                // is sometimes necessary to avoid rpm directory conflicts
+                addParentDirs = false
+                into '/usr/share/tomcat/endorsed'
+            }
 
-    task packageDeb(type: Deb) {
-        packageName = 'com.greatdreams.kotlin.template'
-        version = '0.0.1'
-        release = 2
-
-        configurationFile('/etc/defaults/myapp')
-        installUtils file('scripts/deb/utils.sh')
-        preInstall file('scripts/deb/preInstall.sh')
-        postInstall file('scripts/deb/postInstall.sh')
-        preUninstall file('scripts/deb/preUninstall.sh')
-        postUninstall file('scripts/deb/postUninstall.sh')
-
-        requires('bar', '2.2')
-        requires('baz', '1.0.1')
-        requires('qux')
-
-        into "/opt/${project.name}"
-
-        from(jar.outputs.files) {
-            into 'lib'
+            link('/etc/init.d/foo', '/opt/foo/bin/foo.init')
         }
-        from(configurations.runtime) {
-            into 'lib'
-        }
-        from('lib') {
-            into 'lib'
-        }
-        from('scripts') {
-            into 'bin'
-            exclude 'database'
-            fileMode 0550
-        }
-        from('src/main/resources') {
-            fileType CONFIG | NOREPLACE
-            into 'conf'
-        }
-        from('home') {
-            createDirectoryEntry = true
-            fileMode 0500
-            into 'home'
-        }
-        from('endorsed') {
-            into '/usr/share/tomcat/endorsed'
-        }
-
-        link('/etc/init.d/foo', '/opt/foo/bin/foo.init')
-
-        customField 'Build-Host', 'http://mycihost'
-        customField([
-                'Commit-ID': 'deadbeef',
-                'Owner'    : 'John Doe <johndoe@sweetdomain.io>'
-        ])
-        customFields << [
-                'Build-Job': 'FooProject'
-        ]
-    }
-
-    task packageRpm(type: Rpm) {
-        packageName 'com.greatdreams.java.getstarted'
-        version '0.0.1'
-        //
-        // release 1
-        arch I386
-        os LINUX
-
-        installUtils = file('scripts/rpm/utils.sh')
-        preInstall file('scripts/rpm/preInstall.sh')
-        postInstall file('scripts/rpm/postInstall.sh')
-        preUninstall file('scripts/rpm/preUninstall.sh')
-        postUninstall file('scripts/rpm/postUninstall.sh')
-        preTrans file('scripts/rpm/preTrans.sh')
-        postTrans file('scripts/rpm/postTrans.sh')
-
-        requires('bar', '2.2', GREATER | EQUAL)
-        requires('baz', '1.0.1', LESS)
-        requires('qux')
-
-        into "/opt/${project.name}"
-
-        from(jar.outputs.files) {
-            into 'lib'
-        }
-        from(configurations.runtime) {
-            into 'lib'
-        }
-        from('lib') {
-            into 'lib'
-        }
-        from('scripts') {
-            into 'bin'
-            exclude 'database'
-            fileMode 0550
-        }
-        from('src/main/resources') {
-            fileType CONFIG | NOREPLACE
-            into 'conf'
-        }
-        from('home') {
-            // Creating directory entries (or not) in the RPM is normally left up to redline-rpm library.
-            // Use this to explicitly create an entry -- for setting directory fileMode on system directories.
-            createDirectoryEntry = true
-            fileMode 0500
-            into 'home'
-        }
-        from('endorsed') {
-            // Will tell redline-rpm not to auto create directories, which
-            // is sometimes necessary to avoid rpm directory conflicts
-            addParentDirs = false
-            into '/usr/share/tomcat/endorsed'
-        }
-
-        link('/etc/init.d/foo', '/opt/foo/bin/foo.init')
     }
 }
 

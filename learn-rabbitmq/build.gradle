@@ -1,0 +1,7 @@
+mainClassName = 'com.greatdreams.learn.rabbitmq.MainProgram'
+// applicationDefaultJvmArgs = [】
+
+def rabbitmqVersion = '5.2.0'
+dependencies {
+    compile "com.rabbitmq:amqp-client:${rabbitmqVersion}"
+}
