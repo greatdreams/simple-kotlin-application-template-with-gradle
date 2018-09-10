@@ -4,7 +4,7 @@ mainClassName = 'com.greatdreams.learn.vertx.MainProgram'
 
 def kotlinxCoroutineVersion = '0.22.5'
 def korVersion = '0.15.1'
-def vertxVersion = '3.5.1'
+def vertxVersion = '3.5.2'
 
 sourceCompatibility = '1.8'
 
@@ -29,7 +29,7 @@ dependencies {
     compile "io.vertx:vertx-web:${vertxVersion}"
     compile "io.vertx:vertx-web-client:${vertxVersion}"
     compile "io.vertx:vertx-codegen:${vertxVersion}"
-    compile "io.vertx:vertx-docgen:${vertxVersion}"
+    compile "io.vertx:vertx-docgen:3.5.1"
     compile "io.vertx:vertx-hazelcast:${vertxVersion}"
     compile "io.vertx:vertx-rx-java:${vertxVersion}"
     compile "io.vertx:vertx-lang-kotlin:${vertxVersion}"

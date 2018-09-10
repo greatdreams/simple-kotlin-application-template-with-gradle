@@ -17,8 +17,6 @@ plugins {
 apply plugin: 'scala'
 apply plugin: 'application'
 
-
-
 mainClassName = 'com.greatdreams.learn.scala.MainProgram'
 // applicationDefaultJvmArgs = [】
 
@@ -56,9 +54,13 @@ dependencies {
 
     // Declare the dependency for your favourite test framework you want to use in your tests.
     testCompile "org.scalatest:scalatest_2.12:${scalaTestVersion}"
-    testCompile "org.pegdown:pegdown:1.4.2"
+    testRuntime "org.pegdown:pegdown:1.4.2"
 }
 
 test {
     maxParallelForks = 1
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
 }

@@ -3,10 +3,10 @@ mainClassName = 'com.greatdreams.learn.akka.http.MainProgram'
 
 apply plugin: "scala"
 
-def scalaVersion = '2.12.5'
+def scalaVersion = '2.12.6'
 def scalaTestVersion = '3.0.5'
-def akkaVersion = '2.5.12'
-def akkaHTTPVersion = '10.1.1'
+def akkaVersion = '2.5.13'
+def akkaHTTPVersion = '10.1.3'
 
 dependencies {
     compile "org.scala-lang:scala-compiler:${scalaVersion}"
@@ -26,4 +26,8 @@ dependencies {
     // akka http library dependencies
     compile "com.typesafe.akka:akka-http_2.12:${akkaHTTPVersion}"
     testCompile "com.typesafe.akka:akka-http-testkit_2.12:${akkaHTTPVersion}"
+}
+
+run {
+    standardInput = System.in
 }

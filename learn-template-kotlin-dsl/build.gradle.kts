@@ -1,8 +1,9 @@
 import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.include
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-
+import org.gradle.api.plugins.JavaPluginConvention
 
 buildscript {
     val repos = listOfNotNull(
@@ -19,153 +20,164 @@ buildscript {
         }
     }
 
-    var kotlinVersion = "1.2.41"
     val junitVersion = "1.2.0"
     dependencies {
         classpath("org.junit.platform:junit-platform-gradle-plugin:$junitVersion")
     }
 }
-
 plugins {
+    java
     application
     kotlin("jvm")
     id("org.jetbrains.dokka")
     `maven-publish`
 }
 
-repositories {
-
-    maven {
-        url = uri("https://dl.bintray.com/kotlin/kotlin-dev/")
+allprojects {
+    apply {
+        plugin("java")
+        plugin("application")
+        plugin("org.jetbrains.kotlin.jvm")
+        plugin("maven-publish")
+        plugin("org.jetbrains.dokka")
     }
-
-    maven {
-        url = uri("https://repo.huaweicloud.com/repository/maven/")
-        credentials {
-            username = "greatdreams"
-            password = "Hd-0_Ct0u_R"
-        }
-    }
-
-    jcenter()
-}
-
-dependencies {
-    val spekVersion = "1.1.5"
-    val kluentVersion = "1.15"
-    val harmkrest = "1.4.2.2"
-    val winterbVersion = "0.5.0"
-    val junitVersion = "1.2.0"
-
-    compile(kotlin("stdlib"))
-    compile(kotlin("reflect"))
-
-
-    testCompile("org.jetbrains.spek:spek-api:$spekVersion"){
-        exclude("org.jetbrains.kotlin")
-    }
-    testCompile("org.jetbrains.spek:spek-junit-platform-engine:$spekVersion") {
-        exclude("org.junit.platform")
-    }
-
-    testCompile("org.amshove.kluent:kluent:$kluentVersion")
-    testCompile("com.natpryce:hamkrest:$harmkrest")
-    testCompile("com.winterbe:expekt:${winterbVersion}")
-    testCompile("org.junit.platform:junit-platform-runner:$junitVersion")
-
-}
-
-application {
-    mainClassName = "com.greatdreams.learn.*.MainProgram"
-}
-
-
-val sourcesJar by tasks.creating(Jar::class) {
-    classifier = "sources"
-    from(java.sourceSets["main"].allSource)
-}
-
-val dokkaJavadoc by tasks.creating(org.jetbrains.dokka.gradle.DokkaTask::class) {
-    outputFormat = "javadoc"
-    outputDirectory = "$buildDir/dokkaJavadoc"
-    noStdlibLink = true
-}
-
-
-val javadocJar by tasks.creating(Jar::class) {
-    classifier = "javadoc"
-    from(dokkaJavadoc)
-}
-
-
-kotlin {
-    experimental.coroutines = Coroutines.ENABLE
-}
-
-
-publishing {
+    
     repositories {
+        mavenCentral()
+        jcenter()
         maven {
-            name = "local"
-            url = uri("$buildDir/repo")
+            url = uri("https://dl.bintray.com/kotlin/kotlin-dev/")
         }
         maven {
-            name = "lab"
-            url = uri("http://nexus.buptnsrc.com/content/repositories/thirdparty/")
+            url = uri("https://repo.huaweicloud.com/repository/maven/")
             credentials {
                 username = "greatdreams"
-                password = "893557whw"
+                password = "Hd-0_Ct0u_R"
             }
         }
     }
 
-    if (!project.hasProperty("jenkins")) {
-        println("Property 'jenkins' not set. Publishing only to MavenLocal")
-    } else {
-        (publications) {
-            "maven"(MavenPublication::class) {
-                from(components["java"])
-                artifact(sourcesJar)
-                artifact(javadocJar)
+    dependencies {
+
+        val slf4jVersion: String by project
+        val logbackVersion: String by project
+        val groovyVersion: String by project
+
+        val spekVersion: String by project
+        val kluentVersion: String by project
+        val harmkrest: String by project
+        val winterbVersion: String by project
+        val junitVersion : String by project
+
+        compile(kotlin("stdlib"))
+        compile(kotlin("reflect"))
+
+
+        compile("org.slf4j:slf4j-api:$slf4jVersion")
+        compile("org.slf4j:jul-to-slf4j:$slf4jVersion")
+        compile("ch.qos.logback:logback-core:$logbackVersion")
+        compile("ch.qos.logback:logback-classic:$logbackVersion")
+        compile("ch.qos.logback:logback-access:$logbackVersion")
+        compile("org.codehaus.groovy:groovy-all:$groovyVersion")
+
+
+        testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
+            exclude("org.jetbrains.kotlin")
+        }
+        testCompile("org.jetbrains.spek:spek-junit-platform-engine:$spekVersion") {
+            exclude("org.junit.platform")
+        }
+
+        testCompile("org.amshove.kluent:kluent:$kluentVersion")
+        testCompile("com.natpryce:hamkrest:$harmkrest")
+        testCompile("com.winterbe:expekt:$winterbVersion")
+        testCompile("org.junit.platform:junit-platform-runner:$junitVersion")
+
+    }
+
+    application {
+        mainClassName = "com.greatdreams.learn.*.MainProgram"
+    }
+
+
+
+    val sourcesJar by tasks.creating(Jar::class) {
+        classifier = "sources"
+        from(sourceSets["main"].allSource)
+    }
+
+    val dokkaJavadoc by tasks.creating(DokkaTask::class) {
+        outputFormat = "javadoc"
+        outputDirectory = "$buildDir/dokkaJavadoc"
+        noStdlibLink = true
+    }
+
+
+    val javadocJar by tasks.creating(Jar::class) {
+        classifier = "javadoc"
+        from(dokkaJavadoc)
+    }
+
+
+    kotlin {
+        experimental.coroutines = Coroutines.ENABLE
+    }
+
+    publishing {
+        repositories {
+            maven {
+                name = "local"
+                url = uri("$buildDir/repo")
             }
-
-        }
-    }
-
-    (publications) {
-        "mavenJava"(MavenPublication::class) {
-            from(components["java"])
-            artifact(sourcesJar)
-            artifact(javadocJar)
-        }
-    }
-}
-tasks {
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-    withType<Test> {
-        testLogging.showStandardStreams = true
-    }
-    withType<Jar> {
-        manifest {
-            attributes["Main-Class"] = application.mainClassName
-        }
-        from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
-    }
-    withType<GradleBuild> {
-        finalizedBy("publishToMavenLocal")
-    }
-
-    // Use the native JUnit support of Gradle.
-    "test"(Test::class) {
-        useJUnitPlatform {
-            includeEngines("spek")
-        }
-        reports {
-            junitXml.setEnabled(true)
-            html.setEnabled(true)
+            maven {
+                name = "lab"
+                url = uri("http://nexus.buptnsrc.com/content/repositories/thirdparty/")
+                credentials {
+                    username = "greatdreams"
+                    password = "893557whw"
+                }
+            }
         }
 
+        if (!project.hasProperty("jenkins")) {
+            println("Property 'jenkins' not set. Publishing only to MavenLocal")
+        } else {
+            (publications) {
+                "maven"(MavenPublication::class) {
+                    from(components["java"])
+                    artifact(sourcesJar)
+                    artifact(javadocJar)
+                }
+
+            }
+        }
+    }
+    tasks {
+        withType<KotlinCompile> {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+        withType<Test> {
+            testLogging.showStandardStreams = true
+        }
+        withType<Jar> {
+            manifest {
+                attributes["Main-Class"] = application.mainClassName
+            }
+            from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
+        }
+        withType<GradleBuild> {
+            finalizedBy("publishToMavenLocal")
+        }
+
+        // Use the native JUnit support of Gradle.
+        "test"(Test::class) {
+            useJUnitPlatform {
+                includeEngines("spek")
+            }
+            reports {
+                junitXml.setEnabled(true)
+                html.setEnabled(true)
+            }
+        }
     }
 }

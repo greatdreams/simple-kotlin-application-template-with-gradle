@@ -1,7 +1,7 @@
 mainClassName = 'com.greatdreams.kotlin.example.functional.MainClass'
 // applicationDefaultJvmArgs = [】
 
-def zookeeperVersion = '3.5.3-beta'
+def zookeeperVersion = '3.5.4-beta'
 dependencies {
     compile "org.apache.zookeeper:zookeeper:${zookeeperVersion}"
 }

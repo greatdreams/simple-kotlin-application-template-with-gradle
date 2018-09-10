@@ -1,0 +1,5 @@
+rootProject.name = "learn-akka-cluster"
+
+include 'cluster-node1'
+include 'cluster-node2'
+include 'cluster-node3'

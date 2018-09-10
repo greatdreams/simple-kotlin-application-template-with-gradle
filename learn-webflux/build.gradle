@@ -1,11 +1,11 @@
 plugins {
-    id "org.gretty" version "2.1.0"
-    id "org.jetbrains.kotlin.plugin.spring" version "1.2.31"
+    id "org.gretty" version "2.2.0"
+    id "org.jetbrains.kotlin.plugin.spring" version "1.2.60"
 }
 
 apply plugin: 'war'
 
-def springVersion = "5.0.5.RELEASE"
+
 dependencies {
     compile "org.springframework:spring-webflux:${springVersion}"
     compile "org.springframework:spring-context:${springVersion}"
@@ -18,6 +18,6 @@ gretty {
     host = "127.0.0.1"
     httpPort = 8090
     httpsEnabled = true
-    loggingLevel="DEBUG"
+    loggingLevel = "DEBUG"
     serverConfigFile = 'tomcat9-server.xml'
 }

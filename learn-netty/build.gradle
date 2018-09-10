@@ -1,7 +1,7 @@
 mainClassName = 'com.greatdreams.learn.netty.MainProgram'
 // applicationDefaultJvmArgs = [】
 
-def nettyVersion = '4.1.25.Final'
+def nettyVersion = '4.1.28.Final'
 
 dependencies {
     // netty dependencies

@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlinVersion = '1.2.50'
+    ext.kotlinVersion = '1.2.60'
     ext.dokkaVersion = '0.9.16'
     ext.junitGradleVersion = '1.1.0'
     ext.ospackagePlugin = '4.7.5'
@@ -79,6 +79,7 @@ project.ext {
 // create a run task in development mode
 task devRun(type: JavaExec) {
     classpath = project.sourceSets.main.runtimeClasspath
+
     main = "com.greatdreams.kotlin.template.MainClass"
     jvmArgs("-Dconfig.file=${project.projectDir}/conf-${project.ext.mode}/application.conf")
     jvmArgs("-Dlogback.configurationFile=${project.projectDir}/conf-${project.ext.mode}/logback.groovy")
@@ -116,7 +117,7 @@ distributions {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "4.8"
+    gradleVersion = "4.10-rc-1"
 }
 
 //create a single Jar with all dependencies
@@ -137,6 +138,21 @@ allprojects {
             && !it.name.equals("learn-template-kotlin-dsl")
             && !it.name.equals("learn-dubbo")
             && !it.name.equals("learn-snmp4j")
+            && !it.name.equals("learn-scala13")
+            && !it.name.equals("learn-akka-cluster")
+            && !it.name.equals("learn-java")
+            && !it.name.equals("learn-java11")
+            && !it.name.equals("learn-java:socket-client")
+            && !it.name.equals("learn-java:socket-server")
+            && !it.name.equals("learn-java:socket-client1")
+            && !it.name.equals("learn-java:socket-server1")
+            && !it.name.equals("learn-java-compression")
+            && !it.name.equals("learn-httpclient")
+            && !it.name.equals("learn-groovy")
+            && !it.name.equals("learn-apache-pdfbox")
+           //  && !it.name.equals("learn-webflux")
+
+
     ) {
         apply plugin: 'java'
         apply plugin: 'kotlin'
@@ -153,7 +169,7 @@ allprojects {
         apply plugin: 'org.asciidoctor.convert'
         apply plugin: 'nebula.ospackage'
 
-        sourceCompatibility = '1.9'
+        sourceCompatibility = '1.8'
         [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
         kotlin {
@@ -173,6 +189,7 @@ allprojects {
             maven { url "http://jcenter.bintray.com/" }
             maven { url "http://dl.bintray.com/jetbrains/spek" }
             maven { url "https://dl.bintray.com/kotlin/kotlin-dev/" }
+            /*
             maven {
                 url 'https://repo.huaweicloud.com/repository/maven/'
                 credentials {
@@ -180,6 +197,7 @@ allprojects {
                     password 'Hd-0_Ct0u_R'
                 }
             }
+            */
         }
 
         def spekVersion = '1.1.5'
@@ -211,8 +229,8 @@ allprojects {
         def commonTextVersion = '1.2'
 
         def junit4Version = '4.12'
-        def junitVintageVersion = '5.1.1'
-        def junitJupiterVersion = '5.1.1'
+        def junitVintageVersion = '5.2.0'
+        def junitJupiterVersion = '5.2.0'
 
         dependencies {
             compile "org.jetbrains.kotlin:kotlin-compiler:$kotlinVersion"
@@ -572,7 +590,7 @@ subprojects {
     group = 'com.greatdreams.kotlin.example'
 }
 
-project(':rxkotlin-example') {
+/*project(':rxkotlin-example') {
 }
 
 project(':functional-example') {
@@ -590,8 +608,9 @@ project(':java-example') {
 }
 project(':learn-java') {
     version = '0.0.1'
-}
+}*/
 
+/*
 project(':learn-spring-example') {
     version = '0.0.1'
 }
@@ -606,3 +625,4 @@ project(':learn-pcap4j') {
 project(':learn-template') {
     version = '0.0.1'
 }
+*/
