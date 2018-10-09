@@ -41,7 +41,7 @@ allprojects {
         plugin("maven-publish")
         plugin("org.jetbrains.dokka")
     }
-
+    
     repositories {
         mavenCentral()
         jcenter()
@@ -58,43 +58,31 @@ allprojects {
     }
 
     dependencies {
-        val slf4jVersion = "1.7.25"
-        val logbackVersion = "1.2.3"
-        val groovyVersion = "2.5.2"
 
-        val spekVersion = "1.2.0"
-        val kluentVersion = "1.15"
-        val harmkrest = "1.4.2.2"
-        val winterbVersion = "0.5.0"
-        val junitVersion = "1.2.0"
+        val slf4jVersion: String by project
+        val logbackVersion: String by project
+        val groovyVersion: String by project
 
-        val kotlinxCoroutineVersion = "0.24.0"
-        val korVersion = "0.20.0"
+        val spekVersion: String by project
+        val kluentVersion: String by project
+        val harmkrest: String by project
+        val winterbVersion: String by project
+        val junitVersion : String by project
 
+        val icuVersion : String by project
 
         compile(kotlin("stdlib"))
         compile(kotlin("reflect"))
 
 
-        compile("org.slf4j:slf4j-api:${slf4jVersion}")
-        compile("org.slf4j:jul-to-slf4j:${slf4jVersion}")
+        compile("org.slf4j:slf4j-api:$slf4jVersion")
+        compile("org.slf4j:jul-to-slf4j:$slf4jVersion")
         compile("ch.qos.logback:logback-core:$logbackVersion")
         compile("ch.qos.logback:logback-classic:$logbackVersion")
         compile("ch.qos.logback:logback-access:$logbackVersion")
         compile("org.codehaus.groovy:groovy-all:$groovyVersion")
 
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-io:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-nio:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-quasar:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-guava:${kotlinxCoroutineVersion}")
-        compile("com.soywiz:korio:$korVersion")
+        compile("com.ibm.icu:icu4j:$icuVersion")
 
 
         testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
@@ -106,13 +94,13 @@ allprojects {
 
         testCompile("org.amshove.kluent:kluent:$kluentVersion")
         testCompile("com.natpryce:hamkrest:$harmkrest")
-        testCompile("com.winterbe:expekt:${winterbVersion}")
+        testCompile("com.winterbe:expekt:$winterbVersion")
         testCompile("org.junit.platform:junit-platform-runner:$junitVersion")
 
     }
 
     application {
-        mainClassName = "com.greatdreams.learn.kotlin.MainProgram"
+        mainClassName = "com.greatdreams.learn.*.MainProgram"
     }
 
 

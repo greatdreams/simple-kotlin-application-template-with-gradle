@@ -30,7 +30,7 @@ The Reactive Streams specification consists of the following parts:
 
 Implementations are free to implement additional features not covered by the specification as long as they conform to the API requirements and pass the tests in the TCK.
 
-####### API Components
+###### API Components
 
   The API consists of the following components that are required to be provided by Reactive Stream implementations:
         
@@ -39,7 +39,7 @@ Implementations are free to implement additional features not covered by the spe
   * Subscription
   * Processor
 
-```java
+   ```java
 public interface Publisher<T> {
     public void subscribe(Subscriber<? super T> s);
 }

@@ -58,43 +58,53 @@ allprojects {
     }
 
     dependencies {
-        val slf4jVersion = "1.7.25"
-        val logbackVersion = "1.2.3"
-        val groovyVersion = "2.5.2"
 
-        val spekVersion = "1.2.0"
-        val kluentVersion = "1.15"
-        val harmkrest = "1.4.2.2"
-        val winterbVersion = "0.5.0"
-        val junitVersion = "1.2.0"
+        val slf4jVersion: String by project
+        val logbackVersion: String by project
+        val groovyVersion: String by project
 
-        val kotlinxCoroutineVersion = "0.24.0"
-        val korVersion = "0.20.0"
+        val spekVersion: String by project
+        val kluentVersion: String by project
+        val harmkrest: String by project
+        val winterbVersion: String by project
+        val junitVersion : String by project
 
+        val luceneVersion : String by project
 
         compile(kotlin("stdlib"))
         compile(kotlin("reflect"))
 
+        compile("org.apache.lucene:lucene-core:$luceneVersion")
+        compile("org.apache.lucene:lucene-analyzers-common:$luceneVersion")
+        compile("org.apache.lucene:lucene-analyzers-kuromoji:$luceneVersion")
+        compile("org.apache.lucene:lucene-analyzers-phonetic:$luceneVersion")
+        compile("org.apache.lucene:lucene-analyzers-smartcn:$luceneVersion")
+        compile("org.apache.lucene:lucene-analyzers-stempel:$luceneVersion")
+        compile("org.apache.lucene:lucene-analyzers-morfologik:$luceneVersion")
+        compile("org.apache.lucene:lucene-analyzers-uima:$luceneVersion")
+        compile("org.apache.lucene:lucene-queries:$luceneVersion")
+        compile("org.apache.lucene:lucene-queryparser:$luceneVersion")
+        compile("org.apache.lucene:lucene-highlighter:$luceneVersion")
+        compile("org.apache.lucene:lucene-memory:$luceneVersion")
+        compile("org.apache.lucene:lucene-spatial:$luceneVersion")
+        compile("org.apache.lucene:lucene-grouping:$luceneVersion")
+        compile("org.apache.lucene:lucene-expressions:$luceneVersion")
+        compile("org.apache.lucene:lucene-facet:$luceneVersion")
+        compile("org.apache.lucene:lucene-join:$luceneVersion")
+        compile("org.apache.lucene:lucene-suggest:$luceneVersion")
+        compile("org.apache.lucene:lucene-misc:$luceneVersion")
+        compile("org.apache.lucene:lucene-demo:$luceneVersion")
+        compile("org.apache.lucene:lucene-replicator:$luceneVersion")
+        compile("org.apache.lucene:lucene-benchmark:$luceneVersion")
+        testCompile("org.apache.lucene:lucene-test-framework:$luceneVersion")
 
-        compile("org.slf4j:slf4j-api:${slf4jVersion}")
-        compile("org.slf4j:jul-to-slf4j:${slf4jVersion}")
+
+        compile("org.slf4j:slf4j-api:$slf4jVersion")
+        compile("org.slf4j:jul-to-slf4j:$slf4jVersion")
         compile("ch.qos.logback:logback-core:$logbackVersion")
         compile("ch.qos.logback:logback-classic:$logbackVersion")
         compile("ch.qos.logback:logback-access:$logbackVersion")
         compile("org.codehaus.groovy:groovy-all:$groovyVersion")
-
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-io:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-nio:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-quasar:${kotlinxCoroutineVersion}")
-        compile("org.jetbrains.kotlinx:kotlinx-coroutines-guava:${kotlinxCoroutineVersion}")
-        compile("com.soywiz:korio:$korVersion")
 
 
         testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
@@ -106,13 +116,13 @@ allprojects {
 
         testCompile("org.amshove.kluent:kluent:$kluentVersion")
         testCompile("com.natpryce:hamkrest:$harmkrest")
-        testCompile("com.winterbe:expekt:${winterbVersion}")
+        testCompile("com.winterbe:expekt:$winterbVersion")
         testCompile("org.junit.platform:junit-platform-runner:$junitVersion")
 
     }
 
     application {
-        mainClassName = "com.greatdreams.learn.kotlin.MainProgram"
+        mainClassName = "com.greatdreams.learn.lucene.MainProgram"
     }
 
 
@@ -179,7 +189,7 @@ allprojects {
             manifest {
                 attributes["Main-Class"] = application.mainClassName
             }
-            // from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
+         //   from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
         }
         withType<GradleBuild> {
             finalizedBy("publishToMavenLocal")

@@ -57,7 +57,7 @@ repositories {
 dependencies {
     val slf4jVersion = "1.7.25"
     val logbackVersion = "1.2.3"
-    val groovyVersion = "3.0.0-alpha-3"
+    val groovyVersion : String by project
 
     val spekVersion = "1.1.5"
     val kluentVersion = "1.15"
@@ -91,7 +91,7 @@ dependencies {
 }
 
 application {
-    mainClassName = "com.greatdreams.learn.*.MainProgram"
+    mainClassName = "com.greatdreams.learn.groovy.MainProgram"
 }
 
 
@@ -150,6 +150,7 @@ publishing {
         }
     }
 
+    /*
     (publications) {
         "mavenJava"(MavenPublication::class) {
             from(components["java"])
@@ -157,6 +158,7 @@ publishing {
             artifact(javadocJar)
         }
     }
+    */
 }
 tasks {
     withType<KotlinCompile> {
@@ -169,7 +171,7 @@ tasks {
         manifest {
             attributes["Main-Class"] = application.mainClassName
         }
-        from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
+        // from(configurations.runtime.map { if (it.isDirectory()) it else zipTree(it) })
     }
     withType<GradleBuild> {
         finalizedBy("publishToMavenLocal")

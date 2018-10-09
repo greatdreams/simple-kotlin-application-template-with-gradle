@@ -76,6 +76,7 @@ allprojects {
         val hsqldbDriverVersion : String by project
 
         val hikariCPVersion: String by project
+        val dbcp2Version : String by project
 
 
         compile(kotlin("stdlib"))
@@ -98,6 +99,11 @@ allprojects {
         compile("org.apache.derby:derby:$derbyDriverVersion")
         compile("com.h2database:h2:$h2DriverVersion")
         compile("org.hsqldb:hsqldb:$hsqldbDriverVersion")
+
+        /**
+         * Apache Commons DBCP software imiplements Database Connection Pooling
+         */
+        compile("org.apache.commons:commons-dbcp2:$dbcp2Version")
 
         // HikariCP Database Connection
         compile("com.zaxxer:HikariCP:$hikariCPVersion")
@@ -185,7 +191,7 @@ allprojects {
             manifest {
                 attributes["Main-Class"] = application.mainClassName
             }
-            from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
+            // from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
         }
         withType<GradleBuild> {
             finalizedBy("publishToMavenLocal")

@@ -178,7 +178,7 @@ tasks {
         manifest {
             attributes["Main-Class"] = application.mainClassName
         }
-        from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
+        //from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
     }
     withType<GradleBuild> {
         finalizedBy("publishToMavenLocal")

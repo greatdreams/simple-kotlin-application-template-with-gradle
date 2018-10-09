@@ -182,7 +182,7 @@ allprojects {
             manifest {
                 // attributes["Main-Class"] = application.mainClassName
             }
-            from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
+            // from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
         }
         withType<GradleBuild> {
             finalizedBy("publishToMavenLocal")
@@ -205,7 +205,9 @@ allprojects {
 
 application {
     mainClassName = "com.greatdreams.learn.java.MainProgram"
-    applicationDefaultJvmArgs = listOf("-Dfile.encoding=UTF-8", "-Djavax.net.debug=all")
+    applicationDefaultJvmArgs = listOf("-Dfile.encoding=UTF-8"
+            //, "-Djavax.net.debug=all"
+            )
 }
 
 tasks.create<JavaExec>("startQuoteClient") {

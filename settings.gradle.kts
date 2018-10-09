@@ -73,8 +73,9 @@ include 'learn-kafka'
 include 'learn-dubbo'
 include 'learn-snmp4j'
 include 'learn-scala13'*/
-
+include("learn-groovy")
 include("learn-httpclient")
+include("learn-icu")
 include("learn-java")
 include("learn-java:socket-client")
 include("learn-java:socket-server")
@@ -85,13 +86,15 @@ include("learn-java:sslsocket-server")
 include("learn-java:learn-sslengine")
 include("learn-jdbc")
 include("learn-jetty")
+include("learn-lucene")
 include("learn-kotlin")
 include("learn-reactor")
 include("learn-spring")
 include("learn-springboot")
+include("learn-tomcat")
 include("learn-template-kotlin-dsl")
-/*
 
+/*
 include 'learn-groovy'
 include 'learn-java'
 include 'learn-java10'

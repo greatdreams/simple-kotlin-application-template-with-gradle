@@ -21,8 +21,10 @@ buildscript {
     }
 
     val junitVersion = "1.2.0"
+    val springbootVersion = "2.0.5.RELEASE"
     dependencies {
         classpath("org.junit.platform:junit-platform-gradle-plugin:$junitVersion")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springbootVersion")
     }
 }
 plugins {
@@ -31,9 +33,11 @@ plugins {
     kotlin("jvm")
     id("org.jetbrains.dokka")
     `maven-publish`
-    id("org.jetbrains.kotlin.plugin.allopen").version("1.2.61")
-    id("org.springframework.boot").version("2.0.4.RELEASE")
+    id("org.jetbrains.kotlin.plugin.allopen").version("1.3.0-rc-146")
+    // id("org.springframework.boot").version("2.0.5.RELEASE")
 }
+
+apply(plugin = "org.springframework.boot")
 
 allprojects {
     apply {
@@ -175,7 +179,7 @@ allprojects {
             manifest {
                 attributes["Main-Class"] = application.mainClassName
             }
-            from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
+            // from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
         }
         withType<GradleBuild> {
             finalizedBy("publishToMavenLocal")

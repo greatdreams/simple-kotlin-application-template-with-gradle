@@ -30,7 +30,7 @@ plugins {
     application
     kotlin("jvm")
     id("org.jetbrains.dokka")
-    id("org.jetbrains.kotlin.plugin.allopen").version("1.2.61")
+    id("org.jetbrains.kotlin.plugin.allopen").version("1.3.0-rc-146")
     `maven-publish`
 }
 
@@ -210,7 +210,7 @@ allprojects {
             manifest {
                 attributes["Main-Class"] = application.mainClassName
             }
-            from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
+            // from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
         }
         withType<GradleBuild> {
             finalizedBy("publishToMavenLocal")

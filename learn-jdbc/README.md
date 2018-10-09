@@ -8,3 +8,4 @@ JDBC technology allows you to use the Java programming language to exploit "Writ
 1. [JDBC Technology Overview](http://www.oracle.com/technetwork/java/overview-141217.html)
 2. [JDBC 4.1 Specification](http://download.oracle.com/otn-pub/jcp/jdbc-4_1-mrel-spec/jdbc4.1-fr-spec.pdf?AuthParam=1535700948_bd0b79ec869b5b581c95c92c2926a8c3)
 3. [JDBC 4.2 Specification](http://download.oracle.com/otndocs/jcp/jdbc-4_2-mrel2-spec/index.html)
+4. [Apache DBCP2](http://commons.apache.org/proper/commons-dbcp/)

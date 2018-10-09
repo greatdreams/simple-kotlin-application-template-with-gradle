@@ -2,9 +2,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     val repos = listOfNotNull(
-            "https://jcenter.bintray.com/",
-            "https://plugins.gradle.org/m2",
+            "https://dl.bintray.com/kotlin/kotlin-eap/",
+            "https://dl.bintray.com/kotlin/kotlin-dev/",
             "http://dl.bintray.com/kotlin/kotlinx",
+            "https://plugins.gradle.org/m2",
+            "https://jcenter.bintray.com/",
             "https://repo.gradle.org/gradle/libs-releases-local", // for native-platform
             "https://jetbrains.bintray.com/intellij-third-party-dependencies", // for jflex
             "https://dl.bintray.com/jetbrains/markdown" // for org.jetbrains:markdown
@@ -27,8 +29,8 @@ val dokkaVersion = "0.9.16"
 plugins {
     java
     application
-    kotlin("jvm").version("1.2.61")
-    id("org.jetbrains.dokka").version("0.9.16")
+    kotlin("jvm").version("1.3.0-rc-146")
+    id("org.jetbrains.dokka").version("0.9.17")
     `maven-publish`
 }
 
