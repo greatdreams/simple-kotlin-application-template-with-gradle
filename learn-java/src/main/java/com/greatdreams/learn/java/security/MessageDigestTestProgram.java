@@ -29,7 +29,7 @@ public class MessageDigestTestProgram {
                 "SHA3-512"
         };
 
-        for(String algorithm: algorithms) {
+        for (String algorithm : algorithms) {
             System.out.println("---------------------------------------------");
             System.out.println("MessageDigest(" + algorithm + ")");
             try {
@@ -50,10 +50,12 @@ public class MessageDigestTestProgram {
 
         printMessageDigest("BC");
 
-        for(String algorithm: algorithms) {
+        for (String algorithm : algorithms) {
             String message = "hello world";
             printHash(message, algorithm);
         }
+
+        testKeccak();
     }
 
     public static void printMessageDigest(String providerName) {
@@ -85,7 +87,7 @@ public class MessageDigestTestProgram {
                 "DSTU7564"
         };
 
-        for(String algorithm: algorithms) {
+        for (String algorithm : algorithms) {
             System.out.println("---------------------------------------------");
             System.out.println("MessageDigest(" + algorithm + ")");
             try {
@@ -110,11 +112,36 @@ public class MessageDigestTestProgram {
     public static void printHash(String message, String algorithm) {
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
-            byte[] hashValue  = md.digest(message.getBytes());
+            byte[] hashValue = md.digest(message.getBytes());
             String hash = Hex.toHexString(hashValue);
             System.out.println(message + " " + algorithm + "is " + hash);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void testKeccak() {
+        String[] algorithms = {
+                "Keccak-224",
+                "Keccak-288",
+                "Keccak-256",
+                "Keccak-384",
+                "Keccak-512",
+                "SHA3-224",
+                "SHA3-256",
+                "SHA3-384",
+                "SHA3-512"
+        };
+
+        String message = "The quick brown fox jumps over the lazy dog";
+        for(var alogrithm : algorithms) {
+            try {
+                MessageDigest md = MessageDigest.getInstance(alogrithm);
+                String hash = Hex.toHexString(md.digest(message.getBytes()));
+                System.out.println(alogrithm + " of " + message  + " is " + hash);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

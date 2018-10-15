@@ -46,11 +46,10 @@ public class MainProgram {
         // KeyFactoryTestProgram.main(args);
         // KeyStoreTestProgram.main(args);
         // CipherTestProgram.main(args);
-        // MessageDigestTestProgram.main(args);
         // AESEncryptionTestProgram.main(args);
         // KeyAgreementTestProgram.main(args);
         // MacTestProgram.main(args);
-
+         MessageDigestTestProgram.main(args);
         // FontListDemo.main(args);
         // CharsetTestProgram.main(args);
         // LocaleTestProgram.main(args);
@@ -71,7 +70,8 @@ public class MainProgram {
         // PemReadAndWriteTestProgram.main(args);
 
         // KeyPairGeneratorTestProgram.main(args);
-        try {
+
+        /*try {
             GeneratingCertificateTestProgram.main(args);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -80,7 +80,7 @@ public class MainProgram {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+*/
         logger.info("application exit normally");
     }
 
