@@ -2,11 +2,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     val repos = listOfNotNull(
-            "https://dl.bintray.com/kotlin/kotlin-eap/",
-            "https://dl.bintray.com/kotlin/kotlin-dev/",
-            "http://dl.bintray.com/kotlin/kotlinx",
             "https://plugins.gradle.org/m2",
             "https://jcenter.bintray.com/",
+	    "https://dl.bintray.com/kotlin/kotlin-eap/",
+            "https://dl.bintray.com/kotlin/kotlin-dev/",
+            "http://dl.bintray.com/kotlin/kotlinx",
             "https://repo.gradle.org/gradle/libs-releases-local", // for native-platform
             "https://jetbrains.bintray.com/intellij-third-party-dependencies", // for jflex
             "https://dl.bintray.com/jetbrains/markdown" // for org.jetbrains:markdown
