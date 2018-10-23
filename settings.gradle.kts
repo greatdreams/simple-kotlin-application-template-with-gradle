@@ -73,6 +73,7 @@ include 'learn-kafka'
 include 'learn-dubbo'
 include 'learn-snmp4j'
 include 'learn-scala13'*/
+include("learn-akka")
 include("learn-groovy")
 include("learn-httpclient")
 include("learn-icu")

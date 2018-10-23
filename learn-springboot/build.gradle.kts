@@ -12,7 +12,8 @@ buildscript {
             "http://dl.bintray.com/kotlin/kotlinx",
             "https://repo.gradle.org/gradle/libs-releases-local", // for native-platform
             "https://jetbrains.bintray.com/intellij-third-party-dependencies", // for jflex
-            "https://dl.bintray.com/jetbrains/markdown" // for org.jetbrains:markdown
+            "https://dl.bintray.com/jetbrains/markdown", // for org.jetbrains:markdown
+            "https://repo.spring.io/libs-milestone" // spring milestone libraries
     )
     repositories {
         for (repo in repos) {
@@ -21,7 +22,7 @@ buildscript {
     }
 
     val junitVersion = "1.2.0"
-    val springbootVersion = "2.0.5.RELEASE"
+    val springbootVersion = "2.1.0.RC1"
     dependencies {
         classpath("org.junit.platform:junit-platform-gradle-plugin:$junitVersion")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springbootVersion")
@@ -34,7 +35,6 @@ plugins {
     id("org.jetbrains.dokka")
     `maven-publish`
     id("org.jetbrains.kotlin.plugin.allopen").version("1.3.0-rc-146")
-    // id("org.springframework.boot").version("2.0.5.RELEASE")
 }
 
 apply(plugin = "org.springframework.boot")
