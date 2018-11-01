@@ -19,11 +19,6 @@ buildscript {
             maven(url = repo)
         }
     }
-
-    val junitVersion = "1.2.0"
-    dependencies {
-        classpath("org.junit.platform:junit-platform-gradle-plugin:$junitVersion")
-    }
 }
 plugins {
     java
@@ -108,7 +103,8 @@ allprojects {
         testCompile("org.amshove.kluent:kluent:$kluentVersion")
         testCompile("com.natpryce:hamkrest:$harmkrest")
         testCompile("com.winterbe:expekt:$winterbVersion")
-        testCompile("org.junit.platform:junit-platform-runner:$junitVersion")
+        testCompile("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+        testRuntime("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
     }
 
@@ -227,9 +223,6 @@ allprojects {
         withType<KotlinCompile> {
             kotlinOptions.jvmTarget = "1.8"
         }
-        withType<Test> {
-            testLogging.showStandardStreams = true
-        }
         withType<DokkaTask> {
             outputFormat = "html"
             outputDirectory = "$buildDir/javadoc"
@@ -253,6 +246,8 @@ allprojects {
 
         // Use the native JUnit support of Gradle.
         "test"(Test::class) {
+            testLogging.showStandardStreams = true
+
             useJUnitPlatform {
                 includeEngines("spek")
                 includeEngines("spek2")

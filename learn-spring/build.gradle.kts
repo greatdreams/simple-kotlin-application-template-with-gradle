@@ -30,7 +30,7 @@ plugins {
     application
     kotlin("jvm")
     id("org.jetbrains.dokka")
-    id("org.jetbrains.kotlin.plugin.allopen").version("1.3.0-rc-146")
+    id("org.jetbrains.kotlin.plugin.allopen")
     `maven-publish`
 }
 

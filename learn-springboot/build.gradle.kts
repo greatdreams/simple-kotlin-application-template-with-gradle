@@ -22,7 +22,7 @@ buildscript {
     }
 
     val junitVersion = "1.2.0"
-    val springbootVersion = "2.1.0.RC1"
+    val springbootVersion = "2.1.0.RELEASE"
     dependencies {
         classpath("org.junit.platform:junit-platform-gradle-plugin:$junitVersion")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springbootVersion")
@@ -34,7 +34,7 @@ plugins {
     kotlin("jvm")
     id("org.jetbrains.dokka")
     `maven-publish`
-    id("org.jetbrains.kotlin.plugin.allopen").version("1.3.0-rc-146")
+    id("org.jetbrains.kotlin.plugin.allopen")
 }
 
 apply(plugin = "org.springframework.boot")

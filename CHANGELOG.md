@@ -1,4 +1,13 @@
+######2018-11-01
+
+upgrade gradle to 5.0-rc-1
+
+upgrade dependencies
+* junit to 5.3.1
+
+
 ######2018-10-31
+
 upgrade dependencies
 
 * kotlin 1.3.0

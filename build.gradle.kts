@@ -11,16 +11,10 @@ buildscript {
             "https://jetbrains.bintray.com/intellij-third-party-dependencies", // for jflex
             "https://dl.bintray.com/jetbrains/markdown" // for org.jetbrains:markdown
     )
-
     repositories {
         for (repo in repos) {
             maven(url = repo)
         }
-    }
-
-    val junitVersion = "1.2.0"
-    dependencies {
-        classpath("org.junit.platform:junit-platform-gradle-plugin:$junitVersion")
     }
 }
 
@@ -30,6 +24,7 @@ plugins {
     java
     application
     kotlin("jvm").version("1.3.0")
+    id("org.jetbrains.kotlin.plugin.allopen").version("1.3.0")
     id("org.jetbrains.dokka").version("0.9.17")
     `maven-publish`
 }
