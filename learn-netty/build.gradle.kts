@@ -1,9 +1,6 @@
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.include
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-import org.gradle.api.plugins.JavaPluginConvention
 
 buildscript {
     val repos = listOfNotNull(
@@ -29,10 +26,13 @@ plugins {
     java
     application
     kotlin("jvm")
-    id("org.jetbrains.dokka")
-    id("org.jetbrains.kotlin.plugin.allopen").version("1.3.0")
+    id("org.jetbrains.dokka") 
     `maven-publish`
+    signing
 }
+
+group = "com.greatdreams.lean.kotlin"
+version = "0.0.1"
 
 allprojects {
     apply {
@@ -41,6 +41,7 @@ allprojects {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("maven-publish")
         plugin("org.jetbrains.dokka")
+        plugin("signing")
     }
 
     repositories {
@@ -68,19 +69,15 @@ allprojects {
         val kluentVersion: String by project
         val harmkrest: String by project
         val winterbVersion: String by project
-        val junitVersion : String by project
+        val junitVersion: String by project
 
-        val springVersion : String by project
-        val springbootVersion : String by project
+        val spek2Version: String by project
+        
+        val nettyVersion: String by project
 
-        val postgresqlDriverVersion: String by project
-        val hikariCPVersion: String by project
-        val mybatisplusVersion : String by project
-        val mybatisSpringVersion : String by project
-
-        compile(kotlin("stdlib-jdk8"))
         compile(kotlin("stdlib"))
         compile(kotlin("reflect"))
+        compile(kotlin("stdlib-jdk8"))
 
 
         compile("org.slf4j:slf4j-api:$slf4jVersion")
@@ -89,26 +86,24 @@ allprojects {
         compile("ch.qos.logback:logback-classic:$logbackVersion")
         compile("ch.qos.logback:logback-access:$logbackVersion")
         compile("org.codehaus.groovy:groovy-all:$groovyVersion")
+        
+        // netty library dependencies
+        compile("io.netty:netty-all:$nettyVersion")
 
-        // postgresql driver
-        compile("org.postgresql:postgresql:$postgresqlDriverVersion")
-        // HikariCP Database Connection
-        compile("com.zaxxer:HikariCP:$hikariCPVersion")
-        //mybatis-plus is an extension to mybatis(an ORM library)
-        compile("com.baomidou:mybatis-plus:$mybatisplusVersion")
-        compile("org.mybatis:mybatis-spring:$mybatisSpringVersion")
-
-        //springframework library
-        compile("org.springframework:spring-context:$springVersion")
-        compile("org.springframework:spring-jdbc:$springVersion")
-
-        // spring-boot library
-        compile("org.springframework.boot:spring-boot-starter-web:$springbootVersion")
-
+        // add spek2 (a test framework) to dependencies
+        testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spek2Version") {
+            exclude("org.jetbrains.kotlin")
+        }
+        testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spek2Version") {
+            exclude("org.junit.platform")
+            exclude("org.jetbrains.kotlin")
+        }
+        // add spek (a test framework) to dependencies
         testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
             exclude("org.jetbrains.kotlin")
         }
         testCompile("org.jetbrains.spek:spek-junit-platform-engine:$spekVersion") {
+            exclude("org.jetbrains.kotlin")
             exclude("org.junit.platform")
         }
 
@@ -120,27 +115,38 @@ allprojects {
     }
 
     application {
-        mainClassName = "com.greatdreams.learn.mybatisplus.MainProgram"
+        mainClassName = "com.greatdreams.learn.netty.MainProgram"
     }
 
-
-
-    val sourcesJar by tasks.creating(Jar::class) {
+/*    val sourcesJar by tasks.creating(Jar::class) {
         classifier = "sources"
         from(sourceSets["main"].allSource)
+    }*/
+
+    task<Jar>("sourceJar") {
+        classifier = "sources"
+
+        from(sourceSets["main"].allJava)
+    }
+    task<Jar>("javadocJar") {
+        classifier = "javadoc"
+
+        from(tasks["javadoc"])
+        from(tasks["dokka"])
     }
 
+    /*
     val dokkaJavadoc by tasks.creating(DokkaTask::class) {
-        outputFormat = "javadoc"
-        outputDirectory = "$buildDir/dokkaJavadoc"
-        noStdlibLink = true
+            outputFormat = "html"
+            outputDirectory = "$buildDir/dokkaJavadoc"
+            noStdlibLink = true
     }
-
 
     val javadocJar by tasks.creating(Jar::class) {
         classifier = "javadoc"
-        from(dokkaJavadoc)
+        from(dokka)
     }
+    */
 
 
     kotlin {
@@ -162,7 +168,7 @@ allprojects {
                 }
             }
         }
-
+/*
         if (!project.hasProperty("jenkins")) {
             println("Property 'jenkins' not set. Publishing only to MavenLocal")
         } else {
@@ -170,12 +176,55 @@ allprojects {
                 "maven"(MavenPublication::class) {
                     from(components["java"])
                     artifact(sourcesJar)
-                    artifact(javadocJar)
                 }
 
             }
+        }*/
+
+        publications {
+            create<MavenPublication>("mavenJava") {
+                // artifact(tasks["distZip"])
+                // artifact(tasks["customDistTar"])
+                from(components["java"])
+                artifact(tasks["sourceJar"])
+                artifact(tasks["javadocJar"])
+
+                pom {
+                    name.set("My Library")
+                    description.set("A concise description of my library")
+                    url.set("http://github.com/greatedreams")
+
+                    licenses {
+                        license {
+                            name.set("The Apache License, Version 2.0")
+                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id.set("johnd")
+                            name.set("John Doe")
+                            email.set("john.doe@example.com")
+                        }
+                    }
+
+                    scm {
+                        connection.set("scm:git:git://example.com/my-library.git")
+                        developerConnection.set("scm:git:ssh://example.com/my-library.git")
+                        url.set("http://example.com/my-library/")
+                    }
+                }
+            }
         }
     }
+
+    /*
+    signing {
+        sign(publishing.publications["mavenJava"])
+    }
+    */
+
     tasks {
         withType<KotlinCompile> {
             kotlinOptions.jvmTarget = "1.8"
@@ -183,11 +232,22 @@ allprojects {
         withType<Test> {
             testLogging.showStandardStreams = true
         }
+        withType<DokkaTask> {
+            outputFormat = "html"
+            outputDirectory = "$buildDir/javadoc"
+            noStdlibLink = true
+        }
+        withType<Javadoc> {
+        }
         withType<Jar> {
             manifest {
+                attributes["Implementation-Titile"] = "Gradle"
                 attributes["Main-Class"] = application.mainClassName
             }
             // from(configurations.runtime.map { if (it.isDirectory) it else zipTree(it) })
+            from(configurations.runtime.map {
+                it
+            })
         }
         withType<GradleBuild> {
             finalizedBy("publishToMavenLocal")
@@ -197,10 +257,24 @@ allprojects {
         "test"(Test::class) {
             useJUnitPlatform {
                 includeEngines("spek")
+                includeEngines("spek2")
             }
             reports {
                 junitXml.setEnabled(true)
                 html.setEnabled(true)
+            }
+        }
+    }
+
+    distributions {
+        create("custom") {
+
+        }
+        getByName("main") {
+            // name = "${project.name}-${project.version}"
+
+            contents {
+                from("README.md")
             }
         }
     }

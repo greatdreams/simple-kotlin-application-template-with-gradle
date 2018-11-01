@@ -29,7 +29,7 @@ val dokkaVersion = "0.9.16"
 plugins {
     java
     application
-    kotlin("jvm").version("1.2.70")
+    kotlin("jvm").version("1.3.0")
     id("org.jetbrains.dokka").version("0.9.17")
     `maven-publish`
 }

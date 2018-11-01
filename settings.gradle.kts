@@ -74,6 +74,7 @@ include 'learn-dubbo'
 include 'learn-snmp4j'
 include 'learn-scala13'*/
 include("learn-akka")
+include("learn-ethereum")
 include("learn-groovy")
 include("learn-httpclient")
 include("learn-icu")
@@ -88,6 +89,7 @@ include("learn-java:learn-sslengine")
 include("learn-jdbc")
 include("learn-jetty")
 include("learn-mybatisplus")
+include("learn-netty")
 include("learn-lucene")
 include("learn-kotlin")
 include("learn-reactor")

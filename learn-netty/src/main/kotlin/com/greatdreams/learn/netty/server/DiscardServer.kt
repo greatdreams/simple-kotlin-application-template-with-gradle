@@ -10,9 +10,7 @@ import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.SocketChannel
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.util.ReferenceCountUtil
-import javaslang.collection.List
 import org.slf4j.LoggerFactory
-import java.nio.ByteBuffer
 import java.util.*
 
 class DiscardServer(val port: Int = 10000) {
