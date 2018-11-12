@@ -71,6 +71,7 @@ allprojects {
 
         val spek2Version: String by project
 
+        compile(kotlin("stdlib-common"))
         compile(kotlin("stdlib"))
         compile(kotlin("reflect"))
         compile(kotlin("stdlib-jdk8"))

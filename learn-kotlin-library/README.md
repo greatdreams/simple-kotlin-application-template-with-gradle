@@ -1,16 +1,16 @@
-##### functional-example
+##### learn-kotlin-library
 
 the project for learn functional programming with kotlin.
 
 ##### run
 ```bash
-$ ./gradlew :functional-example:run
+$ ./gradlew :learn-kotlin-library:run
 ```
 
 ##### test
 
 ```bash
-$ ./gradlew :functional-example:test
+$ ./gradlew :learn-kotlin-library:test
 ```
 
 ##### Reference
@@ -30,4 +30,12 @@ $ ./gradlew :functional-example:test
 4. [Kotlin/kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)
    
     Libraries built upon Kotlin coroutines
-5. [kovenant](https://github.com/mplatvoet/kovenant)    
+5. [kovenant](https://github.com/mplatvoet/kovenant)
+
+6. [kotlinx.html](https://github.com/Kotlin/kotlinx.html)
+
+   A kotlinx.html library provides DSL to build HTML to Writer/Appendable or DOM at JVM and browser (or other JavaScript engine) for better Kotlin programming for Web.    
+
+7. [ktor](https://ktor.io/) 
+ 
+   Ktor is a framework for building asynchronous servers and clients in connected systems using the powerful Kotlin programming language.   

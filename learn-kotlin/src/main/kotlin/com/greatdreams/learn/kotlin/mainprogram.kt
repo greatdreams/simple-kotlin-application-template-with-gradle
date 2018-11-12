@@ -7,6 +7,18 @@ import com.greatdreams.learn.kotlin.lambda.LambdaTestProgram
 import com.greatdreams.learn.kotlin.with.WithTest
 import kotlinx.coroutines.*
 
+fun String.removeLastChar() : String = this.substring(0, this.length -1)
+
+class HTML {
+    fun body() {  }
+}
+
+fun html(init: HTML.() -> Unit): HTML {
+    val html = HTML()  // create the receiver object
+    html.init()        // pass the receiver object to the lambda
+    return html
+}
+
 object MainProgram {
     @JvmStatic fun main(args: Array<String>) {
        /*
@@ -25,7 +37,20 @@ object MainProgram {
         */
         println("Welcome, learn kotlin")
 
-        DelegateTestProgram.main(args)
-        LambdaTestProgram.main()
+        // DelegateTestProgram.main(args)
+        /// LambdaTestProgram.main()
+
+        val message = "Hello world"
+        println(message.removeLastChar())
+
+
+        html {       // lambda with receiver begins here
+            body()   // calling a method on the receiver object
+        }
+
     }
+}
+
+class Utils {
+    fun String.removeLastChar(): String = this.substring(0, this.length - 1)
 }

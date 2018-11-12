@@ -21,10 +21,8 @@ buildscript {
         }
     }
 
-    val junitVersion = "1.2.0"
     val springbootVersion = "2.1.0.RELEASE"
     dependencies {
-        classpath("org.junit.platform:junit-platform-gradle-plugin:$junitVersion")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springbootVersion")
     }
 }
@@ -108,8 +106,6 @@ allprojects {
         testCompile("org.amshove.kluent:kluent:$kluentVersion")
         testCompile("com.natpryce:hamkrest:$harmkrest")
         testCompile("com.winterbe:expekt:$winterbVersion")
-        testCompile("org.junit.platform:junit-platform-runner:$junitVersion")
-
     }
 
     application {

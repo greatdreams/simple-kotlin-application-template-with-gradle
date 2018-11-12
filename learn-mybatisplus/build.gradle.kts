@@ -115,7 +115,6 @@ allprojects {
         testCompile("org.amshove.kluent:kluent:$kluentVersion")
         testCompile("com.natpryce:hamkrest:$harmkrest")
         testCompile("com.winterbe:expekt:$winterbVersion")
-        testCompile("org.junit.platform:junit-platform-runner:$junitVersion")
 
     }
 

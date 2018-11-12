@@ -1,3 +1,8 @@
+######2018-11-12
+
+upgrade dependencies
+* akka 2.5.18
+
 ######2018-11-01
 
 upgrade gradle to 5.0-rc-1
