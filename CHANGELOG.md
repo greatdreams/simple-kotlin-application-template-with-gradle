@@ -1,7 +1,12 @@
+######2018-11-13
+
+upgrade gradle 5.0-rc-2
+
 ######2018-11-12
 
 upgrade dependencies
 * akka 2.5.18
+* ethereum 1.9.0-release
 
 ######2018-11-01
 
