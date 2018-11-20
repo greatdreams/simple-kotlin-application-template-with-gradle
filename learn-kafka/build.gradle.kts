@@ -18,8 +18,7 @@ buildscript {
             maven(url = repo)
         }
     }
-
-    var kotlinVersion = "1.2.41"
+    
     val junitVersion = "1.2.0"
     dependencies {
         classpath("org.junit.platform:junit-platform-gradle-plugin:$junitVersion")

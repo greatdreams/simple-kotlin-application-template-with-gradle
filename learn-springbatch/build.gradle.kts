@@ -12,7 +12,8 @@ buildscript {
             "http://dl.bintray.com/kotlin/kotlinx",
             "https://repo.gradle.org/gradle/libs-releases-local", // for native-platform
             "https://jetbrains.bintray.com/intellij-third-party-dependencies", // for jflex
-            "https://dl.bintray.com/jetbrains/markdown" // for org.jetbrains:markdown
+            "https://dl.bintray.com/jetbrains/markdown", // for org.jetbrains:markdown
+            "https://repo.spring.io/libs-milestone" // spring milestone libraries
     )
     repositories {
         for (repo in repos) {
@@ -20,9 +21,9 @@ buildscript {
         }
     }
 
-    val junitVersion = "1.2.0"
+    val springbootVersion = "2.1.0.RELEASE"
     dependencies {
-        classpath("org.junit.platform:junit-platform-gradle-plugin:$junitVersion")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springbootVersion")
     }
 }
 plugins {
@@ -30,9 +31,11 @@ plugins {
     application
     kotlin("jvm")
     id("org.jetbrains.dokka")
-    id("org.jetbrains.kotlin.plugin.allopen")
     `maven-publish`
+    id("org.jetbrains.kotlin.plugin.allopen")
 }
+
+apply(plugin = "org.springframework.boot")
 
 allprojects {
     apply {
@@ -65,15 +68,15 @@ allprojects {
         val logbackVersion: String by project
         val groovyVersion: String by project
 
-        val spekVersion : String by project
-        val kluentVersion : String by project
-        val harmkrest : String by project
-        val winterbVersion : String by project
-        val junitVersion : String by project
+        val spekVersion: String by project
+        val kluentVersion: String by project
+        val harmkrest: String by project
+        val winterbVersion: String by project
 
-        val springVersion : String by project
-        val springSecurityVersion : String by project
-        val springsessionVersion : String by project
+        val mysqlDriverVersion: String by project
+        val postgresqlDriverVersion: String by project
+
+        val springbootVersion : String by project
 
         compile(kotlin("stdlib"))
         compile(kotlin("reflect"))
@@ -86,47 +89,13 @@ allprojects {
         compile("ch.qos.logback:logback-access:$logbackVersion")
         compile("org.codehaus.groovy:groovy-all:$groovyVersion")
 
-        // dependencies related with spring framework
-        compile("org.springframework:spring-context:$springVersion")
-        compile("org.springframework:spring-context-support:$springVersion")
-        compile("org.springframework:spring-core:$springVersion")
-        compile("org.springframework:spring-beans:$springVersion")
-        compile("org.springframework:spring-jdbc:$springVersion")
-        compile("org.springframework:spring-aop:$springVersion")
-        compile("org.springframework:spring-orm:$springVersion")
-        compile("org.springframework:spring-expression:$springVersion")
-        compile("org.springframework:spring-tx:$springVersion")
-        compile("org.springframework:spring-jms:$springVersion")
-        compile("org.springframework:spring-messaging:$springVersion")
-        compile("org.springframework:spring-aspects:$springVersion")
-        compile("org.springframework:spring-instrument:$springVersion")
+        // springboot dependencies
+        compile("org.springframework.boot:spring-boot-starter-batch:$springbootVersion")
+        compile("org.springframework.boot:spring-boot-starter-web:$springbootVersion")
 
-        compile("org.springframework.security:spring-security-core:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-web:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-config:$springSecurityVersion")
-        compile("org.springframework.security.oauth:spring-security-oauth2:2.2.1.RELEASE")
-        compile("org.springframework.security.oauth:spring-security-oauth:2.2.1.RELEASE")
-        compile("org.springframework.security:spring-security-core:1.0.9.RELEASE")
-        compile("org.springframework.security:spring-security-taglibs:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-ldap:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-crypto:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-acl:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-cas:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-aspects:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-openid:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-messaging:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-data:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-oauth2-core:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-oauth2-client:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-oauth2-jose:$springSecurityVersion")
-        compile("org.springframework.security:spring-security-remoting:$springSecurityVersion")
+        compile("mysql:mysql-connector-java:$mysqlDriverVersion")
+        compile("org.postgresql:postgresql:$postgresqlDriverVersion")
 
-        compile("org.springframework.session:spring-session-core:$springsessionVersion")
-        compile("org.springframework.session:spring-session-data-redis:$springsessionVersion")
-        compile("org.springframework.session:spring-session-jdbc:$springsessionVersion")
-        compile("org.springframework.session:spring-session-hazelcast:$springsessionVersion")
-
-        testCompile("org.springframework:spring-test:$springVersion")
 
         testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
             exclude("org.jetbrains.kotlin")
@@ -141,7 +110,7 @@ allprojects {
     }
 
     application {
-        mainClassName = "com.greatdreams.learn.spring.ProgramKt"
+        mainClassName = "com.greatdreams.learn.springbatch.MainProgram"
     }
 
 
@@ -162,7 +131,6 @@ allprojects {
         classifier = "javadoc"
         from(dokkaJavadoc)
     }
-
 
     kotlin {
         experimental.coroutines = Coroutines.ENABLE

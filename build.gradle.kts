@@ -50,7 +50,7 @@ repositories {
 
 tasks {
     withType(Wrapper::class.java) {
-        gradleVersion = "4.10"
+        gradleVersion = "5.0-rc-4"
     }
 }
 dependencies {

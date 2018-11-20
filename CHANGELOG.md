@@ -1,3 +1,19 @@
+###### 2018-11-20
+
+upgrade gradle 5.0-rc-4
+upgrade jdk 12
+
+* upgrade dependencies
+ * tomcat 9.0.13
+ * jetty 9.4.14.v20181114
+ * groovy 2.5.4
+ * ktor 1.0.0
+ * netty 4.1.31.Final
+
+###### 2018-11-14
+
+new add project `learn-springbatch`
+
 ######2018-11-13
 
 upgrade gradle 5.0-rc-2
