@@ -4,6 +4,7 @@ upgrade gradle 5.0-rc-4
 upgrade jdk 12
 
 * upgrade dependencies
+ * kotlin 1.3.10
  * tomcat 9.0.13
  * jetty 9.4.14.v20181114
  * groovy 2.5.4

@@ -82,7 +82,7 @@ allprojects {
         compile("ch.qos.logback:logback-classic:$logbackVersion")
         compile("ch.qos.logback:logback-access:$logbackVersion")
         compile("org.codehaus.groovy:groovy-all:$groovyVersion")
-
+        
         compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutineVersion}")
         compile("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${kotlinxCoroutineVersion}")
         compile("org.jetbrains.kotlinx:kotlinx-io-jvm:0.1.0")
@@ -95,7 +95,6 @@ allprojects {
         compile("org.jetbrains.kotlinx:kotlinx-coroutines-quasar:0.24.0")
         compile("org.jetbrains.kotlinx:kotlinx-coroutines-guava:${kotlinxCoroutineVersion}")
         compile("com.soywiz:korio:$korVersion")
-
 
         testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
             exclude("org.jetbrains.kotlin")
