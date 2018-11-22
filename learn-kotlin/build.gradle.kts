@@ -82,7 +82,7 @@ allprojects {
         compile("ch.qos.logback:logback-classic:$logbackVersion")
         compile("ch.qos.logback:logback-access:$logbackVersion")
         compile("org.codehaus.groovy:groovy-all:$groovyVersion")
-        
+
         compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinxCoroutineVersion}")
         compile("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${kotlinxCoroutineVersion}")
         compile("org.jetbrains.kotlinx:kotlinx-io-jvm:0.1.0")
@@ -109,7 +109,10 @@ allprojects {
     }
 
     application {
-        mainClassName = "com.greatdreams.learn.kotlin.MainProgram"
+        // mainClassName = "com.greatdreams.learn.kotlin.coroutines.MainKt"
+        // mainClassName = "com.greatdreams.learn.kotlin.coroutines.SupervisorJobDemoKt"
+        // mainClassName = "com.greatdreams.learn.kotlin.coroutines.SupervisorScopeDemoKt"
+        mainClassName = "com.greatdreams.learn.kotlin.coroutines.SelectExpressionDemoKt"
     }
 
 

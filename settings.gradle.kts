@@ -100,6 +100,7 @@ include("learn-springbatch")
 include("learn-spring-cloud")
 include("learn-spring-reactor")
 include("learn-springboot")
+include("learn-storm")
 include("learn-tomcat")
 include("learn-template-kotlin-dsl")
 
